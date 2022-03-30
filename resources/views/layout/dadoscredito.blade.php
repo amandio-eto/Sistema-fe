@@ -22,7 +22,7 @@
 
 
                 </div>
-                {{-- <div class="pull-right">
+                {<div class="pull-right">
                     <form class="navbar-form navbar-center" method="GET" action="/Dadoscredito">
                         <div class="input-group text-center">
                             <input type="text" value="" class="form-control" placeholder="Search dashboard..."
@@ -31,7 +31,7 @@
                                         class="bi bi-search"></i></button></span>
                         </div>
                     </form>
-                </div> --}}
+                </div>
 
 
 

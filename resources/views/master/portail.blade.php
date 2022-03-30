@@ -19,8 +19,9 @@
                     <div id="subPages" class="collapse ">
                         <ul class="nav">
                             <li><a href="/setting/logo" class="">Setting Logo</a></li>
-                            <li><a href="page-login.html" class="">Login</a></li>
-                            <li><a href="page-lockscreen.html" class="">Lockscreen</a></li>
+                            <li><a href="/setting/saldo" class="">Setting Logo</a></li>
+                            <li><a href="page-login.html" class="">Password</a></li>
+                            <li><a href="page-lockscreen.html" class="">Cria User</a></li>
                         </ul>
                     </div>
                 </li>
