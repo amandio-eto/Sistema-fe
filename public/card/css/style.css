@@ -1,0 +1,91 @@
+/* ida nee Mak Systel Husi Google Font */
+
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital@1&display=swap');
+.container {
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    width: 500px;
+    height: 300px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.front {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(45deg, #808B96, #3498DB);
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 20px;
+    padding: 20px 10px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.map-img {
+    width: 100%;
+    position: absolute;
+    padding-top: ;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+}
+
+ul {
+    list-style: none;
+    text-decoration: none;
+}
+
+.center {
+    padding-left: 80px;
+    margin-top: -120px;
+    text-decoration: list-style: none;
+    color: black;
+    position: relative;
+    font-family: 'Mulish', sans-serif;
+}
+
+
+/* isa nee Mak Usa B Iha Span */
+
+span {
+    font-weight: 1000;
+}
+
+.card-no {
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    float: left;
+    margin-top: -40px;
+    position: relative;
+    font-weight: 1000;
+    color: #FFD700;
+    text-shadow: 1px 1px white;
+}
+
+.menu {
+    font-size: 14px;
+}
+.img {
+
+    height: 120px;
+    width: 90px;
+    border: 1px solid black;
+}
