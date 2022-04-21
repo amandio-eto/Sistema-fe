@@ -19,13 +19,13 @@
                 <div class="profile-stat">
                     <div class="row">
                         <div class="col-md-4 stat-item">
-                            <span>Quantidade Setor</span>
+                            <span>Quantidade Setor : {{ $app->setoran->count() }}</span>
                         </div>
                         <div class="col-md-4 stat-item">
-                             <span>Total Setoran</span>
+                             <span>Total Setoran : ${{ $app->setoran->sum('update_selu') }}.00</span>
                         </div>
-                        <div class="col-md-4 stat-item">
-                            -$2174.00 Restu <span>Points</span>
+                        <div class="col-md-4 stat-item " style="color:red;">
+                             Restu<span>${{ $app->setoran->sum('update_selu') - $app->total_credito }}</span>
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                         <li>Municipio <span>{{ $app->municipio }}</span></li>
                         <li>Salario <span>${{ $app->salario }}</span></li>
                         <li>Telemovel <span>{{ $app->phone }}</span></li>
-                        <li>Durasaun Credito <span>{{ $app->durasaun }}</span></li>
+                        <li>Durasaun Credito <span>{{ $app->durasaun->tempo }}</span></li>
                         <li>Categoria <span>{{ $app->category }}</span></li>
                         <hr>
                         <li style="border: 1px solid black;">Total Credito <span>${{ $app->total_credito }}</span></li>
@@ -68,17 +68,49 @@
             <div class="awards">
                 <div class="row">
                  <div class="col-md-2 text-left">
-                     <h4 style="font-weight: 1000;">Total Credito ${{ $app->total_credito }}</h4>
+                     <h4 style="font-weight: 1000;">Total Credito :${{ $app->total_credito }}</h4>
                  </div>
 
                  <div class="col-md-2 text-left" >
-                     <h4 style="font-weight: 1000;">Total Setoran : </h4>
+                     <h4 style="font-weight: 1000;">Total Setoran :${{ $app->setoran->sum('update_selu') }}.00 </h4>
                  </div>
-                 <div class="col-md-2 text-left" style="font-weight: 1000">
-                    <h4 style="font-weight: 1000;">Restu : </h4>
+
+                 <div class="col-md-2 text-left" >
+                    <h4 style="font-weight: 1000;">Durasaun : {{ $app->durasaun->tempo }} </h4>
+                </div>
+                <div class="col-md-2 text-left" >
+                    <h4 style="font-weight: 1000;">Total Dividas : ${{$fulan*$app->durasaun->tempo }} </h4>
                 </div>
 
 
+                 <div class="col-md-2 text-left" style="font-weight: 1000">
+                    <h4> Restu:<span style="font-weight: 1000; color: red;">${{$app->setoran->sum('update_selu')-$fulan*$app->durasaun->tempo }} </span> </h4>
+                </div>
+
+
+                </div>
+                <div class="row">
+                    <table class="table" border="1">
+                        <thead>
+                          <tr style="background: yellow;">
+                            <th scope="col">Nu</th>
+                            <th scope="col">Total Credito</th>
+                            <th scope="col">Osan Inan </th>
+                            <th scope="col">Jurus Mensal</th>
+                            <th scope="col">Total Deposito Mensal </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">1</th>
+                            <td>${{ $app->total_credito }}</td>
+                            <td>{{( $test = $app->total_credito)/($app->durasaun->tempo)}}</td>
+                            <td>${{ $osan = $app->total_credito * $app->osanfunan->osanfunan }}</td>
+                            <td>${{  ($app->total_credito)/($app->durasaun->tempo)+$osan}}</td>
+                          </tr>
+
+                        </tbody>
+                      </table>
                 </div>
 
                 <div class="row">
@@ -89,31 +121,44 @@
 
                             <tr>
                                 <th>N<span><sup style="text-style:underline">0</sup></span> </th>
-                                <th>Naran Cliente </th>
-                                <th>Total Setor</th>
-                                <th>Data Setor</th>
+                                <th>Naran Cliente</th>
+                                <th>Code Setoran </th>
+                                <th>Update Setor </th>
+                                <th>Montante </th>
+                                <th>Status</th>
+
                                 <th>Metode Selu</th>
+                                <th>Data Setor</th>
+                                <th>Aksaun </th>
                             </tr>
                         </thead>
                         <tbody>
+
+                            @foreach ($app->setoran as $data)
                             <tr>
-                                <td></td>
-                                <td>Steve</td>
-                                <td>Jobs</td>
-                                <td>@steve</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>FE-00{{ $loop->iteration}}</td>
+                                <td> {{ $data->credito->naran }} {{ $loop->iteration }}</td>
+                                <td>${{ $data->update_selu }}</td>
+                                <td> <span style="background: yellow; border-radius:20px;color:black; padding:6px;font-size:12px;">{{ $data->status }}</span> </td>
+                                <td>{{ $data->pending }}</td>
+                                <td>{{ $data->selu }}</td>
+
+                                <td>{{ date('D, M Y', strtotime($data->data))}}</td>
+                                <td>
+
+                                    @if(auth()->user()->role == 'admin')
+                                    <a href="{{ url('/setoran/edit/'.$data->id) }}"><i class="bi-pen text-warning "></i></a>
+                                    <a href="{{ url('/setoran/delete/'.$data->id) }}"><i class="bi-trash3-fill text-danger"></i></a>
+                                    @endif
+                                    <a href="{{ url('/sistema/print/'.$data->id) }}"><i class="bi bi-printer-fill"></i></a>
+
+                                </td>
+
+
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Simon</td>
-                                <td>Philips</td>
-                                <td>@simon</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Jane</td>
-                                <td>Doe</td>
-                                <td>@jane</td>
-                            </tr>
+                            @endforeach
+
                         </tbody>
                     </table>
 
@@ -132,7 +177,7 @@
             <div class="custom-tabs-line tabs-line-bottom left-aligned">
                 <ul class="nav" role="tablist">
                     <li class="active"><a href="#tab-bottom-left1" role="tab" data-toggle="tab">Cartaun</a></li>
-                    <li><a href="#tab-bottom-left2" role="tab" data-toggle="tab">Projects <span class="badge">7</span></a></li>
+                    <li><a href="#tab-bottom-left2" role="tab" data-toggle="tab">Arquivo <span class="badge">{{ $app->arcivo->count() }}</span></a></li>
                 </ul>
             </div>
             <div class="tab-content">
@@ -196,63 +241,28 @@
                         <table class="table project-table">
                             <thead>
                                 <tr>
-                                    <th>Title</th>
+                                    <th>Nu</th>
+                                    <th>Images</th>
+                                    <th>Naran</th>
+                                    <th>Code</th>
+                                    <th>Montante Transfer</th>
                                     <th>Progress</th>
-                                    <th>Leader</th>
+                                    <th>Data Upload File</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
+
+
+
+                                @foreach ($app->arcivo as $data)
+
                                 <tr>
-                                    <td><a href="#">Spot Media</a></td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                                <span>60% Complete</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td><img src="assets/img/user2.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
-                                    <td><span class="label label-success">ACTIVE</span></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#">E-Commerce Site</a></td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width: 33%;">
-                                                <span>33% Complete</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td><img src="assets/img/user1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Antonius</a></td>
-                                    <td><span class="label label-warning">PENDING</span></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#">Project 123GO</a></td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" style="width: 68%;">
-                                                <span>68% Complete</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td><img src="assets/img/user1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Antonius</a></td>
-                                    <td><span class="label label-success">ACTIVE</span></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#">Wordpress Theme</a></td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
-                                                <span>75%</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td><img src="assets/img/user2.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
-                                    <td><span class="label label-success">ACTIVE</span></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#">Project 123GO</a></td>
+                                    <td><a href="#">{{ $loop->iteration }}</a></td>
+                                    <td><img src="{{ asset('images/'.$data->arcivo) }}" width="50;" alt=""></td>
+                                    <td>{{ $data->credito->naran }}</td>
+                                    <td>FE-00{{ $loop->iteration }}</td>
+                                    <td>${{ $data->montante_transfer }}</td>
                                     <td>
                                         <div class="progress">
                                             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
@@ -260,21 +270,12 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td><img src="assets/img/user1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Antonius</a></td>
-                                    <td><span class="label label-default">CLOSED</span></td>
+                                    <td>{{ $data->created_at->format('D,F Y') }}</td>
+
+
                                 </tr>
-                                <tr>
-                                    <td><a href="#">Redesign Landing Page</a></td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                                <span>100%</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td><img src="assets/img/user5.png" alt="Avatar" class="avatar img-circle"> <a href="#">Jason</a></td>
-                                    <td><span class="label label-default">CLOSED</span></td>
-                                </tr>
+                                @endforeach
+
                             </tbody>
                         </table>
                     </div>

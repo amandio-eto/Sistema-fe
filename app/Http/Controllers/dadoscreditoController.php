@@ -9,6 +9,7 @@ use \App\credito;
 use \App\saldoosan;
 use \App\durasaun;
 use \App\idcredito;
+use App\osanfunan;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class dadoscreditoController extends Controller
@@ -20,15 +21,16 @@ class dadoscreditoController extends Controller
         if ($request->has('cari')) {
             $app = credito::where('naran', 'LIKE', '%' . $request->cari . '%')->get();
         } else {
-            $app = credito::orderBy('id', 'DESC')->paginate(10);
+            $app = credito::orderBy('id', 'DESC')->Paginate(20);
         };
 
 
         $saldo = saldoosan::all();
         $id = idcredito::all();
-        $durasaun = \App\durasaun::all();
+        $durasaun = durasaun::all();
+        $osan = osanfunan::all();
 
-        return view('layout.dadoscredito', compact('saldo', 'durasaun', 'id', 'app'));
+        return view('layout.dadoscredito', compact('saldo', 'durasaun', 'id', 'app', 'osan'));
     }
 
     public function report()
@@ -86,10 +88,50 @@ class dadoscreditoController extends Controller
     }
 
     //ida nee Mak Update Husi Sistema
-    public function update()
+    public function edit($id)
     {
-        return view('layout.edit');
+
+        $data = credito::find($id);
+        $durasaun = durasaun::all();
+        $osan = osanfunan::all();
+
+        return view('layout.dadoscredito_edit', compact('data', 'durasaun', 'osan'));
     }
+
+    public function update(Request $request, $id)
+    {
+
+        $this->validate($request, [
+
+            'naran' => 'required',
+            'data_moris' => 'required',
+            'suco' => 'required',
+            'padministrativo' => 'required',
+            'municipio' => 'required',
+            'salario' => 'required',
+
+
+
+
+
+
+
+        ]);
+
+
+
+
+
+        $app = credito::find($id);
+        $app->update($request->all());
+        return redirect('/Dadoscredito')->with('success', 'Dados Ita Boot Nia Dados Update Ona  ');
+    }
+
+    // ida nee Mak Nia Post Update Mak Nee
+
+
+
+
 
 
 
@@ -103,11 +145,15 @@ class dadoscreditoController extends Controller
         return redirect('/Dadoscredito')->with('success', 'Dados Ita Boot Hamos Ona');
     }
 
+
+
+
     // ida nee mak Detail Huis Sistema
 
     public function detail($id)
     {
         $app = credito::find($id);
-        return view('layout.detail', compact('app'));
+        $fulan = ($app->total_credito) / ($app->durasaun->tempo) + ($app->total_credito * $app->osanfunan->osanfunan);
+        return view('layout.detail', compact('app', 'fulan'));
     }
 }

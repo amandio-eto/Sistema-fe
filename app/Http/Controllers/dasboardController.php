@@ -1,24 +1,24 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App;
 
 use Illuminate\Http\Request;
 use \App\credito;
-
+use App\saldo;
+use App\setoran;
 
 class dasboardController extends Controller
 {
     public function index()
     {
-
-        $saldo = App\saldoosan::all();
+        $update_selu = setoran::all();
+        $saldo = saldo::all();
         $credito = credito::all();
-        $conta = 10000 - $credito->sum('total_credito');
-      
 
-      
-        return view('layout.dasboard',compact('saldo','credito','conta'));
 
+
+        return view('layout.dasboard', compact('saldo', 'credito', 'update_selu'));
     }
 }

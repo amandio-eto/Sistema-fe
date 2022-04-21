@@ -20,10 +20,11 @@
     <!-- ICONS -->
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/apple-icon.png') }}">
     <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('assets/img/favicon.png') }}">
+    <link rel="stylesheet" href="{{ asset('loading/style.css') }}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     {{--  ida nee Mak Link Husi Toaster   --}}
-    https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css
+
     @yield('header')
 
 </head>
@@ -31,12 +32,24 @@
 
 <body>
 
+
+
     <!-- WRAPPER -->
     <div id="wrapper">
+
         @include('master.lanscape')
+
         @include('master.portail')
         <!-- MAIN -->
         <div class="main">
+            <div class="row" style="margin-top:30px;">
+                <div class="col">
+
+
+
+                </div>
+            </div>
+
             @yield('content')
         </div>
         <!-- END MAIN -->

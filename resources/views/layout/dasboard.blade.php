@@ -1,5 +1,10 @@
 @extends('master.master')
 @section('title', 'Dasboard')
+@section('header')
+
+
+@stop
+
 @section('content')
     <!-- MAIN CONTENT -->
     <div class="main-content">
@@ -16,11 +21,11 @@
                             <div class="metric">
                                 <span class="icon"><i class="fa fa-money"></i></span>
                                 <p>
-                                    @foreach ($saldo as $osan)
-                                        <span class="number" style="font-weight:1000;">${{ $osan->saldo }}</span>
-                                    @endforeach
 
-                                    <span class="title text-center">Saldo TOTAL</span>
+                                        <span class="number" style="font-weight:1000;">${{ $saldo->sum('saldo') }}.00</span>
+
+
+                                    <span class="title text-center" style="text-transform:upercase">Saldo TOTAL</span>
                                 </p>
                             </div>
                         </div>
@@ -44,10 +49,19 @@
                         </div>
                         <div class="col-md-3">
                             <div class="metric">
+                                <span class="icon"><i class="fa fa-eye"></i></span>
+                                <p>
+                                    <span class="number">${{ $update_selu->sum('update_selu') }}.00</span>
+                                    <span class="title">Total Setoran</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="metric">
                                 <span class="icon"><i class="fa fa-bank"></i></span>
                                 <p>
                                     <span
-                                        class="number text-danger">${{ $osan->saldo - $credito->sum('total_credito') }}.00</span>
+                                        class="number text-danger">${{ $saldo->sum('saldo')-$credito->sum('total_credito') }}.00</span>
                                     <span class="title">SALDO ACTUAL</span>
                                 </p>
                             </div>
@@ -58,6 +72,22 @@
                 </div>
             </div>
             <!-- END OVERVIEW -->
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card">
+                            <div class="card-header">
+
+
+                            </div>
+                            <div class="card-body">
+                              <div class="" id="barchart"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
 
 
 
@@ -65,3 +95,7 @@
     </div>
     <!-- END MAIN CONTENT -->
 @endsection
+
+@section('footer')
+
+@stop

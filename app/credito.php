@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class credito extends Model
 {
-    protected $table = "dadoscredito";
-    protected $fillable = ['naran',  'data_moris', 'hela_fatin', 'suco', 'padministrativo', 'municipio', 'salario', 'total_credito', 'phone', 'foto', 'source', 'durasaun', 'osan_funan'];
+    public $table = "credito";
+    protected $fillable = ['durasaun_id', 'osanfunan_id', 'naran',  'data_moris', 'hela_fatin', 'suco', 'padministrativo', 'municipio', 'salario', 'total_credito', 'phone', 'foto', 'clientid'];
 
     public function getfoto()
     {
@@ -18,4 +18,31 @@ class credito extends Model
         }
         return asset('images/' . $this->foto);
     }
+    public function setoran()
+    {
+        return $this->hasMany(setoran::class);
+    }
+
+    //! ida nee Usa Ba Relasional Database Ho User
+
+    //? ida nee  Halo Relasaun Database Ba Iha arcivu
+    public function arcivo()
+    {
+        return $this->hasMany(arcivo::class);
+    }
+    //! ida nee Halo Link Ho Durasaun
+    public function durasaun()
+    {
+        return $this->belongsTo(durasaun::class);
+    }
+    //! ida nee Mak Nia Roha Husi Durasaun
+
+    //! ida nee Halo Link Ho Osan Funan
+    public function osanfunan()
+    {
+        return $this->belongsTo(osanfunan::class);
+    }
+    //! ida nee Mak Nia Roha Husi Osan Funan
+
+
 }

@@ -1,27 +1,23 @@
 <!-- NAVBAR -->
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="brand">
-        <a href="index.html"><img src="assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>
+        {{--  <a href="index.html"><img src="assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>  --}}
+        <h4>Sistema Fundu Esperanca</h4>
     </div>
     <div class="container-fluid">
         <div class="navbar-btn">
             <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
         </div>
-        <form class="navbar-form navbar-left">
-            <div class="input-group">
-                <input type="text" value="" class="form-control" placeholder="Search dashboard...">
-                <span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
-            </div>
-        </form>
+
 
         <div id="navbar-menu">
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
+               {{--  li class="dropdown">
                     <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
                         <i class="lnr lnr-alarm"></i>
                         <span class="badge bg-danger">5</span>
                     </a>
-                    <ul class="dropdown-menu notifications">
+                    {{--  < <ul class="dropdown-menu notifications">
                         <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>System
                                 space is almost full</a></li>
                         <li><a href="#" class="notification-item"><span class="dot bg-danger"></span>You have 9
@@ -33,9 +29,9 @@
                         <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Your
                                 request has been approved</a></li>
                         <li><a href="#" class="more">See all notifications</a></li>
-                    </ul>
+                    </ul>  --}}
                 </li>
-                <li class="dropdown">
+                {{--  <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i>
                         <span>Help</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                     <ul class="dropdown-menu">
@@ -44,15 +40,16 @@
                         <li><a href="#">Security</a></li>
                         <li><a href="#">Troubleshooting</a></li>
                     </ul>
-                </li>
+                </li>  --}}
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/user.png"
-                            class="img-circle" alt="Avatar"> <span>amandio</span> <i
+
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{{ asset('images/'.Auth::user()->foto) }}"
+                            class="img-circle" alt="Avatar" style="width: 40px;height:40px;possition:absolute;top:10px;left:10px;border: 2px solid black;"> <span>{{ auth()->user()->name }}</span> <i
                             class="icon-submenu lnr lnr-chevron-down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
+                        {{--  <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
                         <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
-                        <li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
+                        <li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>  --}}
                         <li><a href="{{ url('/auth/logout') }}"><i class="lnr lnr-exit text-danger"></i> <span class="text-danger">Logout</span></a></li>
                     </ul>
                 </li>
