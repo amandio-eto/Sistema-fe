@@ -44,5 +44,29 @@ class credito extends Model
     }
     //! ida nee Mak Nia Roha Husi Osan Funan
 
+    //? ida nee mKa Function Husi Funfu Esperanca
 
+    public function osancredito()
+    {
+
+
+        $total = 0;
+
+        foreach ($this->setoran as $creditosetoran) {
+            $total = $total + $creditosetoran->update_selu;
+        }
+        return $total;
+    }
+
+    public function  report()
+    {
+
+        $report = 0;
+        foreach ($this->setoran as $conta) {
+
+            $report = $report + $conta->count();
+        }
+
+        return $report;
+    }
 }

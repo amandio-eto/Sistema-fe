@@ -76,6 +76,7 @@
 
     {{-- ida nee mak Sweetaller --}}
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
     @yield('footer')
 
 </body>

@@ -18,14 +18,10 @@ class dadoscreditoController extends Controller
     {
 
 
-        if ($request->has('cari')) {
-            $app = credito::where('naran', 'LIKE', '%' . $request->cari . '%')->get();
-        } else {
-            $app = credito::orderBy('id', 'DESC')->Paginate(20);
-        };
 
-
-        $saldo = saldoosan::all();
+        $testing = $request->show;
+        $app = credito::orderBy('id', 'ASC', 'naran', 'ASC')->Paginate(15);
+        $saldo = saldo();
         $id = idcredito::all();
         $durasaun = durasaun::all();
         $osan = osanfunan::all();
@@ -35,7 +31,9 @@ class dadoscreditoController extends Controller
 
     public function report()
     {
-        return view('layout.report');
+
+        $credito = credito();
+        return view('layout.report', compact('credito'));
     }
 
     // ida nee mak Create
@@ -154,6 +152,7 @@ class dadoscreditoController extends Controller
     {
         $app = credito::find($id);
         $fulan = ($app->total_credito) / ($app->durasaun->tempo) + ($app->total_credito * $app->osanfunan->osanfunan);
-        return view('layout.detail', compact('app', 'fulan'));
+        $conta = ($app->setoran->sum('update_selu')) / ($fulan * $app->durasaun->tempo);
+        return view('layout.detail', compact('app', 'fulan', 'conta'));
     }
 }

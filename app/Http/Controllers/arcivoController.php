@@ -23,7 +23,6 @@ class arcivoController extends Controller
 
 
         $data = arcivo::all();
-
         return view('arquivo.show', compact('data'));
     }
 
@@ -41,5 +40,26 @@ class arcivoController extends Controller
         return redirect('/arquivo/show')->with('success', 'Ita Nia Arquivo Hatama Ona Base Dados ho Successo');
     }
 
+
     //! ida nee Mak Rohan husi Arquivo
+
+    //todo ida nee Mak Delete
+
+    public function delete($id)
+    {
+        $data = arcivo::find($id);
+        $data->delete($data);
+        return redirect('/arquivo/show')->with('success', 'Ita Nia Arquivo Hamos Ona Ho Sucesso');
+    }
+
+    //? ida nee Mak Update Husi Sistema
+
+    public function edit($id)
+    {
+
+        return view('arquivo.edit', compact('edit'));
+    }
+
+
+    //? ida nee Mak Rohan Husi Update Husi SIstema Arquivo
 }

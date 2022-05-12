@@ -16,9 +16,13 @@ class dasboardController extends Controller
         $update_selu = setoran::all();
         $saldo = saldo::all();
         $credito = credito::all();
+        $cash = $update_selu->sum('update_selu');
+        $saldototal = $saldo->sum('saldo');
+        $saldo_actual = $saldo->sum('saldo') + $update_selu->sum('update_selu');
+        $osanactual = $saldo_actual - $credito->sum('total_credito');
+        $creditoosan = $credito->sum('total_credito');
 
 
-
-        return view('layout.dasboard', compact('saldo', 'credito', 'update_selu'));
+        return view('layout.dasboard', compact('saldo', 'credito', 'update_selu', 'cash', 'saldototal', 'saldo_actual', 'osanactual', 'creditoosan'));
     }
 }

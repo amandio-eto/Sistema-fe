@@ -10,7 +10,7 @@ class setoran extends Model
      * ! ida nee Usa ba Iha Dados Setoran  no Link ho Table user
      */
     public $table = 'setoran';
-    protected $fillable = ['update_selu', 'status', 'selu', 'credito_id', 'data'];
+    protected $fillable = ['update_selu', 'status', 'selu', 'credito_id', 'data', 'extensu'];
 
     // public function credito()
     // {

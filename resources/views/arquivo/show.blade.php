@@ -1,4 +1,4 @@
-@extends('master.master')
+ @extends('master.master')
 
 @section('content')
 <div class="main-content">
@@ -46,13 +46,14 @@
                         <tr>
                             <th>No</th>
                             <th>Image Trasferensia</th>
-                            <th>Naran Cliente</th>
+                            {{--  <th>Naran Cliente</th>  --}}
                             <th>Montante Tansfersia</th>
                             <th>Code Transfersia</th>
                             <th>Commentario</th>
                             <th>Data</th>
                             <th>Download File</th>
                             <th>Uplaod Husi</th>
+                            <th>Aksaun</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,13 +62,16 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td><img src="{{ asset('images/'.$arq->arcivo) }}" width="100px;" alt=""></td>
-                            <td  style="text-transform: uppercase">{{ $arq->credito->naran }}</td>
+                            {{--  <td  style="text-transform: uppercase">{{ $data->credito->naran }}</td>  --}}
                             <td>${{ $arq->montante_transfer }}</td>
                             <td>{{ $arq->comment }}</td>
                             <td>Fe-00{{ $loop->iteration }}</td>
                             <td>{{ $arq->created_at->format('D,F,Y') }}</td>
                             <td> <i class="fa fa-download"></i></td>
                             <td><span class="label label-success" style="text-transform: uppercase">Completo</span></td>
+                            <a href=""></a>
+                            <td><a href="{{ url('/arquivo/delete/'.$arq->id) }}"><i class="bi bi-trash3 text-danger"></i></a>
+                            </td>
                         </tr>
                         @endforeach
 
@@ -80,6 +84,7 @@
                 <div class="row">
 
                     {{--  <div class="col-md-6 text-right">{{ $data->links()}}</div>  --}}
+
                 </div>
             </div>
         </div>

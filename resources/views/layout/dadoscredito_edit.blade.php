@@ -22,7 +22,7 @@
                         <form action="{{ url('/Dadoscredito/update/'.$data->id) }}" method="POST">
                         @csrf
                         <div class="form-group {{ $errors->has('clientid') ? 'has-error' : '' }}">
-                            <label for="exampleFormControlInput1">Client Id :</label>
+                            <label for="exampleFormControlInput1"> Id Cliente:</label>
                             <input type="text" class="form-control" id="exampleFormControlInput1"
                                 name="clientid"  value="{{ $data->clientid }}">
                             @error('clientid')
@@ -122,11 +122,16 @@
                             @enderror
                         </div>
 
-                        <div class="form-check">
 
-
-
-
+                        <div class="form-group  {{ $errors->has('phone') ? 'has-error' : '' }}">
+                            <label for="exampleFormControlInput1">Numero Telemovel</label>
+                            <input type="number" class="form-control" id="exampleFormControlInput1"
+                                name="phone" value="{{ $data->phone }}">
+                            @error('phone')
+                                <div id="validationServer03Feedback" class="invalid-feedback">
+                                    <small class="text-danger"> {{ $message }}</small>
+                                </div>
+                            @enderror
                         </div>
 
 
@@ -136,7 +141,7 @@
                                 <option value="">-- Hili --</option>
 
                                 @foreach ($durasaun as $data)
-                                    <option value="{{ $data->id }}" @if($data->id == $data->id) selected
+                                    <option value="{{ $data->id }}" @if($data->id == $data->naran) selected
 
                                     @endif>Duarsaun {{ $data->tempo }}
 
@@ -150,30 +155,25 @@
                                 <small class="text-danger"> {{ $message }}</small>
                             </div>
                         @enderror
+
+
+
+
                         <label class="fancy-checkbox">
                             @foreach ($osan as $money )
 
-                            <input type="checkbox" value="{{ $money->id }}" name="osanfunan_id">
+                            <input type="checkbox" value="{{ $money->id }}" name="osanfunan_id" >
                             <span> Osan Funan {{ $money->osanfunan }}</span>
                             @endforeach
                         </label>
-                        <div class="form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
-                            <label for="exampleFormControlInput1">Numero Telemovel :</label>
-                            <input type="number" class="form-control" id="exampleFormControlInput1"
-                                name="phone"  value="{{ $data->salario }}">
 
-                            @error('phone')
-                                <div id="validationServer03Feedback" class="invalid-feedback">
-                                    <small class="text-danger"> {{ $message }}</small>
-                                </div>
-                            @enderror
-                        </div>
+
 
 
 
                         <div class="form-group  {{ $errors->has('foto') ? 'has-error' : '' }}">
                             <label for="exampleFormControlInput1">Upload Foto :</label>
-                            <input type="file" class="form-control" name="foto" >
+                            <input type="file" class="form-control" name="foto" value="{{ $data->foto }}" >
                             @error('foto')
                                 <div id="validationServer03Feedback" class="invalid-feedback">
                                     <small class="text-danger"> {{ $message }}</small>

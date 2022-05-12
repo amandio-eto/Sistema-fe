@@ -30,10 +30,10 @@
 
 
 
-        <div class="row" style="margin-top:100px;">
+        <div class="row" style="margin-top:70px;">
             <div class="col-md" style="margin-top:50px;">
                <h3>Fundu Esperanca Timor Oan</h3>
-                <p style="font-style: italic;">"Ami Mak imi Esperanca "</p>
+                <p style="font-style: italic;">"Imi Mak Ami Esperanca "</p>
                 <div class="col-md text-right">
                   <h4  style="text-transform: uppercase;weight:1000;">  Desposito Numerario <br>
                       Original Para O FE Timor</h4>
@@ -47,16 +47,16 @@
                 <div class="row">
                     <div class="col-md">
                         <ul style="list-style: none;">
-                            Numero Client : <h4 style="weight:1000;">{{ $data->credito->clientid }}</h4>
+                            Numero Cliente : <h4 style="weight:1000;">{{ $data->credito->clientid }}</h4>
                             <li>
-                                Data : <p>{{ $data->created_at->format('d,m y') }}</p>
+                                Data : <p>{{ $data->created_at->format('D, d-F-Y') }}</p>
                             </li>
 
-                         <li>Descritivo : Dep Num:888-130908</li>
-                         <li >Valor a depositar : {{ $data->update_selu }} </li>
-                         <li>Total Credito: {{ $data->credito->total_credito }}</li>
+
+                         <li > Valor a depositar : {{ osan($data->update_selu )}} </li>
+                         <li>Extensu: {{ $data->extensu }}</li>
                         <li>Moeda : USD </li>
-                         <li>Quantidade Deposito :</li>
+
                      </ul>
                      <hr>
                     <div class="row justify-content-center mb-2" style="margin-button:20px;">
@@ -68,7 +68,9 @@
                         <div class="col-md-4">
                             <p>Assinatura do Caixa </p> <br>
 
-                            ({{ Auth()->user()->name }})
+                            <img src="{{ asset('assets/img/paid-removebg-preview.png') }}" width="130" alt="" style="margin-top:-60px;"> <br>
+
+                            <p class="" style="margin-top:-20px;">  ({{ Auth()->user()->name }})</p>
 
 
                         </div>
@@ -91,10 +93,10 @@
        </div>
 
 
-       <div class="row" style="margin-top:100px;">
+       <div class="row" style="margin-top:70px;">
         <div class="col-md" style="margin-top:50px;">
-           <h3>Fundu Esperanca Timor Oan</h3>
-            <p style="font-style: italic;padding-left:30%;">"Ami Mak imi Esperanca "</p>
+            <h3>Fundu Esperanca Timor Oan</h3>
+            <p style="font-style: italic;">"Imi Mak Ami Esperanca "</p>
             <div class="col-md text-right">
               <h4  style="text-transform: uppercase;weight:1000;">  Desposito Numerario <br>
                   Original Para O FE Timor</h4>
@@ -108,16 +110,16 @@
             <div class="row">
                 <div class="col-md">
                     <ul style="list-style: none;">
-                        Numero Client : <h4 style="weight:1000;">{{ $data->credito->clientid }}</h4>
+                        Numero Cliente : <h4 style="weight:1000;">{{ $data->credito->clientid }}</h4>
                         <li>
-                            Data : <p>{{ $data->created_at->format('D,F Y') }}</p>
+                            Data : <p>{{ $data->created_at->format('D, d-F-Y') }}</p>
                         </li>
 
-                     <li>Descritivo : Dep Num:888-130908</li>
-                     <li >Valor a depositar : </li>
-                     <li>Total Credito: Dep Num:888-130908</li>
+
+                     <li>Valor a depositar : {{ osan($data->update_selu )}} </li>
+                     <li>Extensu: {{ $data->extensu }}</li>
                     <li>Moeda : USD </li>
-                     <li>Quantidade Deposito :</li>
+
                  </ul>
                  <hr>
                 <div class="row justify-content-center mb-2" style="margin-button:20px;">
@@ -129,7 +131,9 @@
                     <div class="col-md-4">
                         <p>Assinatura do Caixa </p> <br>
 
-                        ({{ Auth()->user()->name }})
+                        <img src="{{ asset('assets/img/paid-removebg-preview.png') }}" width="130" alt="" style="margin-top:-60px;"> <br>
+
+                      <p class="" style="margin-top:-20px;">  ({{ Auth()->user()->name }})</p>
 
 
                     </div>

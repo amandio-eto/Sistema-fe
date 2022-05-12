@@ -9,8 +9,8 @@
 
                 <div class="panel">
                     <div class="panel">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Inputs</h3>
+                        <div class="panel-heading text-center">
+                            <h3 class="panel-title">Update</h3>
                         </div>
                         <div class="panel-body">
 
@@ -24,9 +24,9 @@
                                                                         <option class=""> -- Hili Naran ---</option>
                                                                         @foreach ($data as $app )
 
-                                                                        <option  value="{{ $app->id }}" @if ($app->name == $app->id) selected
+                                                                        <option  value="{{ $app->id }}" @if ($app->id == $edit->credito_id) selected
 
-                                                                        @endif> {{ $loop->iteration }} {{ $app->naran }}</option>
+                                                                        @endif> {{ $app->clientid }}-{{ $app->naran }}</option>
 
 
                                                                         @endforeach
@@ -36,7 +36,7 @@
 
 
                                 <div class="mb-3">
-                                  <label for="exampleInputPassword1" class="form-label">Montante Credito</label>
+                                  <label for="exampleInputPassword1" class="form-label">Montante Selu</label>
                                   <input type="text" class="form-control" id="exampleInputPassword1" name="update_selu" value=" {{ $edit->update_selu }}" >
 
 
@@ -86,7 +86,7 @@
 
                                 <div class="mb-3">
                                     <label for="exampleInputPassword1" class="form-label">Data Selu</label>
-                                    <input type="date" class="form-control" id="exampleInputPassword1" name="data">
+                                    <input type="date" value="{{ $edit->data }}" class="form-control" id="exampleInputPassword1" name="data">
 
 
 

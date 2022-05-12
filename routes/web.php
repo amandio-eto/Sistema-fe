@@ -85,5 +85,14 @@ Route::group(['middleware' => ['auth', 'checkRole:admin,user']], function () {
     Route::get('/Detail/{id}', 'dadoscreditoController@detail');
     Route::get('/setoran/show', 'setoranController@index');
     Route::post('/setoran/create', 'setoranController@create');
+    //todo ida nee Mak Group husi Printer
     Route::get('sistema/print/{id}', 'printController@index');
+    Route::get('sistema/print/extrato/{id}', 'printController@extrato');
+
+    //todo ida nee Mak Rohan Husi Print
 });
+
+//! ida nee Mak husi Route Husi Conta Osan
+Route::get('/contaosan', 'contaosanController@index');
+
+//! ida nee Mak nia Rohan Husi Route

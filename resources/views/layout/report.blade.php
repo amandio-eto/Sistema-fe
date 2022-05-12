@@ -18,31 +18,30 @@
                 <div class="panel-body">
                     <table class="table table-condensed">
                         <thead>
-                            <tr>
-                                <th>#</th>
+                            <tr style="text-transform: uppercase">
+                                <th>Nu</th>
                                 <th>Naran Completo</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
+                                <th>Id Cliente</th>
+                                <th>Data Moris</th>
+                                <th>Total Credito</th>
+                                <th>Total Setoran</th>
+                                <th>Total Dividas</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($credito as $data)
+
                             <tr>
-                                <td>1</td>
-                                <td>Steve</td>
-                                <td>Jobs</td>
-                                <td>@steve</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $data->naran }}</td>
+                                <td>{{ $data->clientid }}</td>
+                                <td>{{ date('d-F-Y',strtotime($data->data_moris))}}</td>
+                                <td>{{osan( $data->total_credito) }}</td>
+                                <td>{{ osan($data->osancredito()) }}</td>
+                                <td>{{ osan($data->osancredito()) }}</td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Simon</td>
-                                <td>Philips</td>
-                                <td>@simon</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Jane</td>
-                                <td>Doe</td>
-                                <td>@jane</td>
+                            @endforeach
+
                             </tr>
                         </tbody>
                     </table>

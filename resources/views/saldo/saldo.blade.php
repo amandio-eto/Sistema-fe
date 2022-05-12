@@ -113,7 +113,7 @@
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>Fe-00000{{$loop->iteration}}</td>
-                                <td>${{ $app->saldo }}</td>
+                                <td>{{ osan($app->saldo) }}</td>
                                 <td>{{ $app->tipo_utilizasaun }}</td>
                                 <td>{{ $app->messagen }}</td>
                             <td>{{ date('d-m-Y', strtotime($app->data)) }}</td>

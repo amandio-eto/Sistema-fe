@@ -19,13 +19,13 @@
                 <div class="profile-stat">
                     <div class="row">
                         <div class="col-md-4 stat-item">
-                            <span>Quantidade Setor : {{ $app->setoran->count() }}</span>
+                            <span>Numeru Husi Setor : {{ $app->setoran->count() }}</span>
                         </div>
                         <div class="col-md-4 stat-item">
-                             <span>Total Setoran : ${{ $app->setoran->sum('update_selu') }}.00</span>
+                             <span>Total Setoran : {{ osan($app->setoran->sum('update_selu') )}}</span>
                         </div>
-                        <div class="col-md-4 stat-item " style="color:red;">
-                             Restu<span>${{ $app->setoran->sum('update_selu') - $app->total_credito }}</span>
+                        <div class="col-md-4 stat-item " >
+                             Restu<span style="color:black;">{{osan($fulan*$app->durasaun->tempo-$app->setoran->sum('update_selu')) }}</span>
                         </div>
                     </div>
                 </div>
@@ -37,17 +37,17 @@
                     <h4 class="heading text-center">Detalho</h4>
                     <ul class="list-unstyled list-justify">
                         <li>Naran Completo : <span>{{ $app->naran }}</span></li>
-                        <li>Data Moris : <span> {{ $app->data_moris }}</span></li>
+                        <li>Data Moris : <span> {{ date('m-F-Y',strtotime($app->data_moris)) }}</span></li>
                         <li>Hela Fatin :<span>{{ $app->hela_fatin }}</span></li>
                           <li>suco <span>{{ $app->suco }}</span></li>
                         <li>Posto administrativo<span>{{ $app->padministrativo }}</span></li>
                         <li>Municipio <span>{{ $app->municipio }}</span></li>
-                        <li>Salario <span>${{ $app->salario }}</span></li>
+                        <li>Salario <span>{{osan($app->salario)  }}</span></li>
                         <li>Telemovel <span>{{ $app->phone }}</span></li>
                         <li>Durasaun Credito <span>{{ $app->durasaun->tempo }}</span></li>
                         <li>Categoria <span>{{ $app->category }}</span></li>
                         <hr>
-                        <li style="border: 1px solid black;">Total Credito <span>${{ $app->total_credito }}</span></li>
+                        <li style="border: 1px solid black;">Total Credito <span>{{ osan($app->total_credito) }}</span></li>
 
                     </ul>
                 </div>
@@ -63,29 +63,62 @@
         <!-- END LEFT COLUMN -->
         <!-- RIGHT COLUMN -->
         <div class="profile-right">
+
+
+            @if( numero($conta*100) == numero(100))
+
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <i class="fa fa-check-circle"></i> {{$app->naran }} Selu Lunas Ona
+            </div>
+            @endif
+
+
+            <p>Update Persentage Setoran {{$sura = numero($conta*100)  }}</p>
+
+          @if (numero($conta*100) == numero(100) )
+          <div class="progress">
+            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:{{numero($conta*100) }}">
+                <p>{{ numero($conta*100) }}</p>
+            </div>
+        </div>
+
+
+          @elseif(numero($conta*100) >= numero(55))
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width:  {{ numero($conta*100) }};" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ numero($conta*100) }}</div>
+          </div>
+          @elseif(numero($conta*100) < numero(55))
+          <div class="progress">
+                <div class="progress-bar bg-danger" role="progressbar" style="width:{{ numero($conta*100)  }}" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          @endif
             <h4 class="heading text-center" style="font-weight:1000">Update Setoran {{ $app->naran }}</h4>
             <!-- AWARDS -->
             <div class="awards">
                 <div class="row">
                  <div class="col-md-2 text-left">
-                     <h4 style="font-weight: 1000;">Total Credito :${{ $app->total_credito }}</h4>
+                     <h4 style="font-weight: 1000;">Total Credito :{{ osan($app->total_credito) }}</h4>
                  </div>
 
                  <div class="col-md-2 text-left" >
-                     <h4 style="font-weight: 1000;">Total Setoran :${{ $app->setoran->sum('update_selu') }}.00 </h4>
+                     <h4 style="font-weight: 1000;">Total Setoran :{{ osan($persen=$app->setoran->sum('update_selu')) }}</h4>
                  </div>
 
                  <div class="col-md-2 text-left" >
                     <h4 style="font-weight: 1000;">Durasaun : {{ $app->durasaun->tempo }} </h4>
                 </div>
                 <div class="col-md-2 text-left" >
-                    <h4 style="font-weight: 1000;">Total Dividas : ${{$fulan*$app->durasaun->tempo }} </h4>
+                    <h4 style="font-weight: 1000;">Total Dividas : {{osan($fulan*$app->durasaun->tempo) }} </h4>
+                </div>
+
+                <div class="col-md-2 text-left" >
+                    <h4 style="font-weight: 1000;">Restu : <span style="font-weight: 1000; color: red;">{{osan($fulan*$app->durasaun->tempo-$app->setoran->sum('update_selu')) }} </span>  </h4>
+
                 </div>
 
 
-                 <div class="col-md-2 text-left" style="font-weight: 1000">
-                    <h4> Restu:<span style="font-weight: 1000; color: red;">${{$app->setoran->sum('update_selu')-$fulan*$app->durasaun->tempo }} </span> </h4>
-                </div>
+
 
 
                 </div>
@@ -103,10 +136,10 @@
                         <tbody>
                           <tr>
                             <th scope="row">1</th>
-                            <td>${{ $app->total_credito }}</td>
-                            <td>{{( $test = $app->total_credito)/($app->durasaun->tempo)}}</td>
-                            <td>${{ $osan = $app->total_credito * $app->osanfunan->osanfunan }}</td>
-                            <td>${{  ($app->total_credito)/($app->durasaun->tempo)+$osan}}</td>
+                            <td>{{ osan($app->total_credito )}}</td>
+                            <td>{{osan(( $test = $app->total_credito)/($app->durasaun->tempo))}}</td>
+                            <td>{{ osan($osan = $app->total_credito * $app->osanfunan->osanfunan )}}</td>
+                            <td>{{ osan( ($app->total_credito)/($app->durasaun->tempo)+$osan)}}</td>
                           </tr>
 
                         </tbody>
@@ -119,9 +152,10 @@
 
                         <thead class="bg-primary text-center">
 
+
                             <tr>
                                 <th>N<span><sup style="text-style:underline">0</sup></span> </th>
-                                <th>Naran Cliente</th>
+                                <th>Nu Extrato</th>
                                 <th>Code Setoran </th>
                                 <th>Update Setor </th>
                                 <th>Montante </th>
@@ -138,13 +172,13 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>FE-00{{ $loop->iteration}}</td>
-                                <td> {{ $data->credito->naran }} {{ $loop->iteration }}</td>
+                                <td> {{ $data->credito->naran }}-{{ $data->credito->clientid }}</td>
                                 <td>${{ $data->update_selu }}</td>
                                 <td> <span style="background: yellow; border-radius:20px;color:black; padding:6px;font-size:12px;">{{ $data->status }}</span> </td>
                                 <td>{{ $data->pending }}</td>
                                 <td>{{ $data->selu }}</td>
 
-                                <td>{{ date('D, M Y', strtotime($data->data))}}</td>
+                                <td>{{ date('d-F-Y', strtotime($data->data))}}</td>
                                 <td>
 
                                     @if(auth()->user()->role == 'admin')
@@ -168,7 +202,8 @@
                 </div>
                 <div class="text-center">
                     <a href="#" class="btn btn-success"> <i class="fa fa-download"></i>Downlaod</a>
-                    <a href="#" class="btn btn-primary"> <span class="lnr lnr-printer"></span>Print</a>
+                    <a href="{{ url('/sistema/print/'.$data->id) }}"
+                    " class="btn btn-primary"> <span class="lnr lnr-printer"></span>Print</a>
                 </div>
 
             </div>
@@ -190,7 +225,7 @@
 
                                 <div class="row">
 
-                                    <img src="/img/chip.png" alt="" width="60px">
+                                    <img src="{{ asset('/img/chip.png') }}" alt="" width="60px">
                                 </div>
                                 <div class="eto">
                                     <div class="col">
@@ -270,7 +305,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td>{{ $data->created_at->format('D,F Y') }}</td>
+                                    <td></td>
 
 
                                 </tr>

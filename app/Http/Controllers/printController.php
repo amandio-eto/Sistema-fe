@@ -14,4 +14,10 @@ class printController extends Controller
 
         return view('print.index', compact('data'));
     }
+
+    public function extrato($id)
+    {
+        $data =  setoran::find($id);
+        return view('print.extrato_print');
+    }
 }

@@ -31,7 +31,7 @@
                             <option value=""> -- Hili --</option>
                             @foreach ( $data as $app)
 
-                            <option value="{{ $app->id }}">{{ $app->naran}}</option>
+                            <option value="{{ $app->id }}">{{ $app->clientid }}-{{ $app->naran }}</option>
                             @endforeach
 
 
@@ -50,7 +50,7 @@
                           </div>
 
                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Taka</button>
                                 <button type="submit" class="btn btn-success">Aquiva foto </button>
                             </div>
                     </form>

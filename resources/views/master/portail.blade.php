@@ -14,12 +14,9 @@
                         <li><a href="{{ url('Dadoscredito') }}" class=""><i class="fa fa-database"></i>
                             <span>Dados Credito</span></a></li>
                             <li><a href="{{ url('/setoran/show') }}" class=""><i class="bi bi-bank"></i>
-                                <span>Selu Setor</span></a></li>
+                            <span>Selu Setor</span></a></li>
 
-            @if(auth()->user()->role == 'admin');
-
-
-
+            @if(auth()->user()->role == 'admin')
                 <li><a href="{{ url('/Report') }}" class=""><i class="lnr lnr-chart-bars"></i>
                         <span>Report</span></a></li>
                 <li><a href="{{ url('/request/credito') }}" class=""><i class="lnr lnr-cog"></i>
@@ -27,8 +24,9 @@
                             <li><a href="{{ url('/arquivo/file') }}" class=""><i class="bi bi-file-earmark-image-fill"></i>
                                 <span>Arquivo Tranferensia</span></a></li>
                 <li>
-                    {{--  <li><a href="{{ url('/chatify') }}" class="">  --}}
-                        {{--  <span> <i class="bi bi-file-text"></i>Formulario Credito</span></a></li>  --}}
+                    <li><a href="{{ url('/contaosan') }}" class="">
+                        <span><i class="bi bi-currency-exchange"></i>Conta Osan</span></a></li>
+
                 <li>
                     <li>
                         <li><a href="{{ url('/avisu') }}" class="">

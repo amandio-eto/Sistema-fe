@@ -18,15 +18,21 @@ class AuthController extends Controller
 
     public function postlogin(Request $request)
     {
+        $request->validate([
+            'email' => 'required|email|min:9',
+            'password' => 'required|string'
+        ]);
         if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect('/Dasboard');
+            return redirect('/Dasboard')->with('login', 'Login Sucesso');
+        } else {
+
+            return redirect('/auth/login')->with('fail', 'Username ou Password Sala');
         }
-        return redirect('/auth/login');
     }
     public function logout()
     {
         Auth::logout();
-        return redirect('/auth/login');
+        return redirect('/auth/login')->with('logout', 'Log Out ho Successo');
     }
 
     // ida nee Mka Halo User Husi SIstema Iha Base de Dados\
