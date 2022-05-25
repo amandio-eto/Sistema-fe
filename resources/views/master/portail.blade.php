@@ -4,7 +4,9 @@
         <nav>
             <ul class="nav">
                 @if(auth()->user()->role == 'admin');
-                <li><a href="{{ url('Dasboard') }}" class="active"><i class="lnr lnr-home"></i>
+                <li><a href="{{ url('/home') }}" class=""><i class="bi bi-house-fill"></i>
+                    <span>Home</span></a></li>
+                <li><a href="{{ url('Dasboard') }}" class="active"><i class="bi bi-bank2"></i>
                         <span>Dashboard</span></a></li>
                         @endif
                         <li><a href="{{ url('/chatify') }}" class="">
@@ -23,15 +25,17 @@
                         <span>Request Credito</span></a></li>
                             <li><a href="{{ url('/arquivo/file') }}" class=""><i class="bi bi-file-earmark-image-fill"></i>
                                 <span>Arquivo Tranferensia</span></a></li>
+                                <li><a href="{{ url('/Transaction') }}" class=""><i class="bi bi-wallet2"></i>
+                                    <span>Transaction</span></a></li>
                 <li>
                     <li><a href="{{ url('/contaosan') }}" class="">
                         <span><i class="bi bi-currency-exchange"></i>Conta Osan</span></a></li>
 
                 <li>
                     <li>
-                        <li><a href="{{ url('/avisu') }}" class="">
-                            <span><span class="lnr lnr-bullhorn"></span> Avisu </span></a></li>
-                    <li>
+                        <li><a href="{{ url('/logs') }}" class="">
+                            <i class="bi bi-file-text"></i> Logs File </span></a></li>
+                         <li>
                     <a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-cog"></i>
                         <span>Setting</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                     <div id="subPages" class="collapse ">
@@ -40,6 +44,7 @@
                             {{--  <li><a href="/setting/saldo" class="">Setting Logo</a></li>  --}}
                             {{--  <li><a href="page-login.html" class="">Password</a></li>  --}}
                             <li><a href="{{ url('/setting/osan') }}" class="">Setting Saldo</a></li>
+                            <li><a href="{{ url('/setting/level') }}" class="">Level Credito</a></li>
                             <li><a href="{{ url('/auth/create/user') }}" class="">Cria User</a></li>
                         </ul>
                     </div>

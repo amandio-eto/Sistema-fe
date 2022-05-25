@@ -50,6 +50,7 @@
                         {{--  <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
                         <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
                         <li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>  --}}
+                        <li><a href="{{ url('/auth/logout') }}"><i class="bi bi-person-circle"></i><span class="">Profile</span></a></li>
                         <li><a href="{{ url('/auth/logout') }}"><i class="lnr lnr-exit text-danger"></i> <span class="text-danger">Logout</span></a></li>
                     </ul>
                 </li>

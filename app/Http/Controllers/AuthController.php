@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\logs;
+use App\Models\User as ModelsUser;
 use \App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rules\Unique;
 
 class AuthController extends Controller
@@ -22,15 +26,80 @@ class AuthController extends Controller
             'email' => 'required|email|min:9',
             'password' => 'required|string'
         ]);
-        if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect('/Dasboard')->with('login', 'Login Sucesso');
+        if(Auth::attempt($request->only('email', 'password'))) {
+         $user =Auth::User();
+        $email = $user->email;
+        $name = $user->name;
+        $role = $user->role;
+
+
+
+
+        $dt = Carbon::now();
+        $time = $dt->toDayDateTimeString();
+
+
+
+        $acloging= [
+
+            'username' => $name,
+            'email' => $email,
+            'role' => $role,
+            'status' => 'login',
+            'date'=>$time,
+
+
+        ];
+
+             logs::create($acloging);
+            return redirect('/home')->with('login', 'Login Sucesso');
+
         } else {
 
+
             return redirect('/auth/login')->with('fail', 'Username ou Password Sala');
+
+
+
+
+
+
+
         }
+
     }
-    public function logout()
+    public function logout(Request $request)
     {
+
+        $user = Auth::User();
+        Session::put('user',$user);
+        $user= Session::get('user');
+
+
+        $email = $user->email;
+        $name = $user->name;
+        $role = $user->role;
+
+
+
+
+        $dt = Carbon::now();
+        $time = $dt->toDayDateTimeString();
+
+
+
+        $aclog= [
+
+            'username' => $name,
+            'email' => $email,
+            'role' => $role,
+            'status' => 'logout',
+            'date'=>$time,
+
+
+        ];
+
+        logs::create($aclog);
         Auth::logout();
         return redirect('/auth/login')->with('logout', 'Log Out ho Successo');
     }

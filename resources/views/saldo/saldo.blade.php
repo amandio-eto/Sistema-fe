@@ -1,5 +1,25 @@
 
 @extends('master.master')
+
+@section('header')
+<style>
+    .thead{
+      /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#e1ffff+0,e1ffff+7,e1ffff+12,fdffff+24,e6f8fd+45,c8eefb+66,bee4f8+81 */
+background: #e1ffff; /* Old browsers */
+background: -moz-linear-gradient(top,  #e1ffff 0%, #e1ffff 7%, #e1ffff 12%, #fdffff 24%, #e6f8fd 45%, #c8eefb 66%, #bee4f8 81%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #e1ffff 0%,#e1ffff 7%,#e1ffff 12%,#fdffff 24%,#e6f8fd 45%,#c8eefb 66%,#bee4f8 81%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #e1ffff 0%,#e1ffff 7%,#e1ffff 12%,#fdffff 24%,#e6f8fd 45%,#c8eefb 66%,#bee4f8 81%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1ffff', endColorstr='#bee4f8',GradientType=0 ); /* IE6-9 */
+
+
+
+color:black;
+text-transform:uppercase;
+
+    }
+</style>
+
+@endsection
 @section('content')
 
     <div class="main-content">
@@ -94,7 +114,7 @@
             <div class="row">
                 <div class="col-md">
                     <table border="1" class="table table-dark">
-                        <thead style="background-color: #7F8C8D ;color:white;>
+                        <thead class="thead">
                           <tr style="back">
                             <th scope="col">Nu</th>
                             <th scope="col">Code</th>

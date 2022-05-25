@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://localhost'),
 
     'asset_url' => env('ASSET_URL', null),
 
@@ -232,7 +232,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
-        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class
+        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
+        'LogActivity' => App\Helper\LogActivity::class
 
 
 

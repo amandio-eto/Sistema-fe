@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/linearicons/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/chartist/css/chartist-custom.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css">
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
     <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
@@ -23,7 +24,7 @@
     <link rel="stylesheet" href="{{ asset('loading/style.css') }}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    {{--  ida nee Mak Link Husi Toaster   --}}
+
 
     @yield('header')
 
@@ -77,6 +78,10 @@
     {{-- ida nee mak Sweetaller --}}
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js"></script>
+
+
+
     @yield('footer')
 
 </body>

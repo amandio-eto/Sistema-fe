@@ -50,6 +50,7 @@
                             <th>Montante Tansfersia</th>
                             <th>Code Transfersia</th>
                             <th>Commentario</th>
+                            <th>Id</th>
                             <th>Data</th>
                             <th>Download File</th>
                             <th>Uplaod Husi</th>
@@ -65,6 +66,7 @@
                             {{--  <td  style="text-transform: uppercase">{{ $data->credito->naran }}</td>  --}}
                             <td>${{ $arq->montante_transfer }}</td>
                             <td>{{ $arq->comment }}</td>
+                            <td>{{ $arq->credito->clientid }}</td>
                             <td>Fe-00{{ $loop->iteration }}</td>
                             <td>{{ $arq->created_at->format('D,F,Y') }}</td>
                             <td> <i class="fa fa-download"></i></td>

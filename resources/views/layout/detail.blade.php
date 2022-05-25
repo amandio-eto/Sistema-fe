@@ -74,7 +74,82 @@
             @endif
 
 
-            <p>Update Persentage Setoran {{$sura = numero($conta*100)  }}</p>
+            <div class="left">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-success m-2" data-toggle="modal" data-target="#exampleModal" style="margin:4px;">
+                    Double <i class="bi bi-plus-circle"></i>
+                </button>
+
+                <p>Update Persentage Setoran {{$sura = numero($conta*100)  }}</p>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button  type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span style="padding:6px;background;red;" aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Level</label>
+
+              <select class="form-control" name="level_id">
+                <option value="cheese" > ----Favor Hili----</option>
+                @foreach($level as $levels)
+
+                <option value="{{ $levels->id }}">{{ $levels->code }}- <span style="padding=2px;background:red;">{{ $levels->level }}</span></option>
+                @endforeach
+            </select>
+
+                <label for="" style="margin-top: 13px;">Durasaun :</label>
+                @foreach ($tempo as $time )
+
+                <div class="form-check form-check-inline text-center" style="margin: 10px;display:inline; padding:4px;" >
+                    <input class="form-check-input" type="radio" name="durasaun" id="" value="option1" id="durasaun">
+                    <label style="padding:6px;color:white; background:#00AAFF;height:30px;width:30px;border-radius:100%;" class="form-check-label" for="inlineRadio1">{{ $time->tempo }}</label>
+               </div>
+                  @endforeach
+
+            <div class="form-group">
+              <label for="exampleInputPassword1">Montante Credito Osan</label>
+              <input type="number" class="form-control" id="montante" name="montante">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Total Dividas</label>
+                <input type="number" id="totaldividas"  class="form-control" name="total_dividas">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Setoran Mensal</label>
+                <input type="number" id="setoranmensal" class="form-control" >
+              </div>
+
+
+
+
+
+
+
+
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Data</label>
+                <input type="date" class="form-control" id="exampleInputPassword1">
+              </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Taka</button>
+                <button type="button" class="btn btn-primary">Save</button>
+              </div>
+          </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+            </div>
 
           @if (numero($conta*100) == numero(100) )
           <div class="progress">
@@ -168,30 +243,33 @@
                         </thead>
                         <tbody>
 
-                            @foreach ($app->setoran as $data)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>FE-00{{ $loop->iteration}}</td>
-                                <td> {{ $data->credito->naran }}-{{ $data->credito->clientid }}</td>
-                                <td>${{ $data->update_selu }}</td>
-                                <td> <span style="background: yellow; border-radius:20px;color:black; padding:6px;font-size:12px;">{{ $data->status }}</span> </td>
-                                <td>{{ $data->pending }}</td>
-                                <td>{{ $data->selu }}</td>
 
-                                <td>{{ date('d-F-Y', strtotime($data->data))}}</td>
-                                <td>
+                        @foreach ($app->setoran as $data)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>FE-00{{ $loop->iteration}}</td>
+                            <td> {{ $data->credito->naran }}-{{ $data->credito->clientid }}</td>
+                            <td>${{ $data->update_selu }}</td>
+                            <td> <span style="background: yellow; border-radius:20px;color:black; padding:6px;font-size:12px;">{{ $data->status }}</span> </td>
+                            <td>{{ $data->pending }}</td>
+                            <td>{{ $data->selu }}</td>
 
-                                    @if(auth()->user()->role == 'admin')
-                                    <a href="{{ url('/setoran/edit/'.$data->id) }}"><i class="bi-pen text-warning "></i></a>
-                                    <a href="{{ url('/setoran/delete/'.$data->id) }}"><i class="bi-trash3-fill text-danger"></i></a>
-                                    @endif
-                                    <a href="{{ url('/sistema/print/'.$data->id) }}"><i class="bi bi-printer-fill"></i></a>
+                            <td>{{ date('d-F-Y', strtotime($data->data))}}</td>
+                            <td>
 
-                                </td>
+                                @if(auth()->user()->role == 'admin')
+                                <a href="{{ url('/setoran/edit/'.$data->id) }}"><i class="bi-pen text-warning "></i></a>
+                                <a href="{{ url('/setoran/delete/'.$data->id) }}"><i class="bi-trash3-fill text-danger"></i></a>
+                                @endif
+                                <a href="{{ url('/sistema/print/'.$data->id) }}"><i class="bi bi-printer-fill"></i></a>
+
+                            </td>
 
 
-                            </tr>
-                            @endforeach
+                        </tr>
+                        @endforeach
+
+
 
                         </tbody>
                     </table>
@@ -323,3 +401,22 @@
 </div>
 
 @stop
+
+@section('footer')
+
+<script src="{{ asset('jquery/jquery.js') }}"></script>
+<script>
+    $(document).keyup(function(){
+
+        var x = Number($('#totaldividas').val());
+        var y = Number($('#montante').val());
+
+        var z = x * y;
+        $('#setoranmensal').val(z);
+
+
+
+    });
+</script>
+
+@endsection

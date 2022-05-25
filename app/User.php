@@ -41,4 +41,19 @@ class User extends Authenticatable
     {
         return $this->belongsTo(credito::class);
     }
+
+    //? ida nee Mak Relasi Antara Table User ho Level
+    public function level()
+    {
+        return $this->hasMany(level::class, 'user_id');
+    }
+
+    //! ida nee Mak Relasaun entre user ho Iha ContaOsan
+
+    public function contaosan()
+    {
+        return $this->hasMany(contaosan::class, 'user_id');
+    }
+
+    //! ida nee Mak Rohan Husi Contaosan no User
 }

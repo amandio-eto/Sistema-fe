@@ -10,6 +10,10 @@ use \App\saldoosan;
 use \App\durasaun;
 use \App\idcredito;
 use App\osanfunan;
+use App\level;
+use App\logs;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class dadoscreditoController extends Controller
@@ -17,10 +21,18 @@ class dadoscreditoController extends Controller
     public function index(Request $request)
     {
 
+        if ($request->has('buka')) {
+            $app = credito::where('naran', 'LIKE', '%' . $request->buka . '%')
+                ->OrWhere('clientid', 'LIKE', '%' . $request->buka . '%')
+                ->get();
+        } else {
+
+            $app = credito::orderBy('id', 'ASC', 'naran', 'ASC')->get();
+        }
+
 
 
         $testing = $request->show;
-        $app = credito::orderBy('id', 'ASC', 'naran', 'ASC')->Paginate(15);
         $saldo = saldo();
         $id = idcredito::all();
         $durasaun = durasaun::all();
@@ -73,6 +85,26 @@ class dadoscreditoController extends Controller
 
         $app = credito::create($request->all());
 
+        $user =Auth::User();
+        $name = $user->name;
+        $email = $user->email;
+        $role = $user->role;
+        $dt = Carbon::now();
+        $time = $dt->toDayDateTimeString();
+
+        $create = [
+
+            'username' => $name,
+            'email' => $email,
+            'role' => $role,
+            'status' => 'Cria Dados Registo Credito Foun',
+            'date'=>$time,
+
+
+        ];
+
+
+
 
         if ($request->hasFile('foto')) {
 
@@ -81,7 +113,7 @@ class dadoscreditoController extends Controller
             $app->save();
         }
 
-
+        logs::create($create);
         return redirect('/Dadoscredito')->with('success', 'Hatama Ona ho Sucesso');
     }
 
@@ -140,6 +172,26 @@ class dadoscreditoController extends Controller
     {
         $app = credito::find($id);
         $app->delete($app);
+
+        $user =Auth::User();
+        $name = $user->name;
+        $email = $user->email;
+        $role = $user->role;
+        $dt = Carbon::now();
+        $time = $dt->toDayDateTimeString();
+
+        $delete = [
+
+            'username' => $name,
+            'email' => $email,
+            'role' => $role,
+            'user_modify' => 'Delete Dados Credito',
+            'status' => 'User Delete File Credito',
+            'date'=>$time,
+
+
+        ];
+        logs::create($delete);
         return redirect('/Dadoscredito')->with('success', 'Dados Ita Boot Hamos Ona');
     }
 
@@ -150,9 +202,11 @@ class dadoscreditoController extends Controller
 
     public function detail($id)
     {
+        $level = level::all();
         $app = credito::find($id);
+        $tempo = durasaun::orderBy('tempo', 'ASC')->get();
         $fulan = ($app->total_credito) / ($app->durasaun->tempo) + ($app->total_credito * $app->osanfunan->osanfunan);
         $conta = ($app->setoran->sum('update_selu')) / ($fulan * $app->durasaun->tempo);
-        return view('layout.detail', compact('app', 'fulan', 'conta'));
+        return view('layout.detail', compact('app', 'fulan', 'conta', 'level', 'tempo'));
     }
 }

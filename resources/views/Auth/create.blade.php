@@ -1,5 +1,24 @@
 @section('header')
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<style>
+    .thead{
+      /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#e1ffff+0,e1ffff+7,e1ffff+12,fdffff+24,e6f8fd+45,c8eefb+66,bee4f8+81 */
+background: #e1ffff; /* Old browsers */
+background: -moz-linear-gradient(top,  #e1ffff 0%, #e1ffff 7%, #e1ffff 12%, #fdffff 24%, #e6f8fd 45%, #c8eefb 66%, #bee4f8 81%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #e1ffff 0%,#e1ffff 7%,#e1ffff 12%,#fdffff 24%,#e6f8fd 45%,#c8eefb 66%,#bee4f8 81%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #e1ffff 0%,#e1ffff 7%,#e1ffff 12%,#fdffff 24%,#e6f8fd 45%,#c8eefb 66%,#bee4f8 81%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1ffff', endColorstr='#bee4f8',GradientType=0 ); /* IE6-9 */
+
+
+
+color:Black;
+text-transform:uppercase;
+
+    }
+    .table{
+        text-align: center;
+    }
+</style>
 @stop
 @extends('master.master')
 
@@ -134,9 +153,9 @@
 
                 <div class="col-md ">
                     <h3 class="text-center"> UTILIZADORES</h3>
-                    <table class="table table-hover">
+                    <table class="table table-hover" border="1">
                         <thead>
-                          <tr style="background:rgb(0, 183, 255);color:white;" >
+                          <tr class="thead">
                             <th scope="col"><span class="lnr lnr-book"></span> Nu</th>
                             <th scope="col">
                                 <span class="lnr lnr-picture"></span>
@@ -146,13 +165,18 @@
                             <th scope="col">
                                 <span class="lnr lnr-users"></span>
                                 Role</th>
-                            <th scope="col">
-                                <span class="lnr lnr-pushpin"></span>
-                                 Status Account</th>
-                            <th scope="col"><i class="fa fa-calendar"></i> Status Crete</th>
+                                <th scope="col">
+                                    <span class="lnr lnr-pushpin"></span>
+                                     Status Account</th>
+
+
+                            <th scope="col"><i class="fa fa-calendar"></i> Status Cria Conta</th>
                             <th scope="col">
                                 <span class="lnr lnr-menu-circle"></span>
-                                 Aksaun</th>
+                            Profile</th>
+                            <th scope="col">
+                                <span class="lnr lnr-menu-circle"></span>
+                            Aksaun</th>
 
                           </tr>
                         </thead>
@@ -168,14 +192,25 @@
                             <td class="badge badge-success">{{ $user->role }}</td>
                             <td>
                                 <input type="checkbox" data-toggle="toggle" data-on="Hamate" data-off="Hamoris">
+                                </td>
 
                             <td>{{ $user->created_at->format('D,F Y') }} <span> <small class="text-waring">{{ $user->created_at->diffForHumans()}} </small></span></td>
+                        </td>
+                        @if($user->role=='admin')
+
+                            <td><i style="padding: 5px;background:#41b314;color:white;border-radius:100%;" class="bi bi-people"></i></td>
+                        @endif
+
+                        @if($user->role=='user')
+
+                        <td><i widht:8; height:8; style="padding: 5px;background:rgba(0,183,255);color:white;border-radius:100%;" class="bi bi-person"></i></td>
+                    @endif
                             <td>
                                 <a  href="{{ url('/auth/create/user/edit/'.$user->id) }}"> <i class="lnr lnr-pencil text-warning"></i> </a>
                                 <a href="{{ url('/auth/create/user/delete/'.$user->id) }}"> <i class="lnr lnr-trash text-danger"></i> </a>
 
-                            </td>
                           </tr>
+
                           @endforeach
 
                         </tbody>

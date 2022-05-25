@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\authController;
+use App\Http\Controllers\dadoscreditoController;
 use App\Http\Middleware\checkRole;
 
 Route::get('/', function () {
@@ -9,11 +10,26 @@ Route::get('/', function () {
 
 // Ida nee Mak Controller Husi Sistema
 Route::get('/auth/login', 'AuthController@login')->name('login');
+
+
 Route::post('/auth/post', 'AuthController@postlogin');
 Route::get('/auth/logout', 'AuthController@logout');
 
 Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
+
+    //?ida ne Mak Route Husi Log
+    Route::get('add-to-log', 'HomeController@myTestAddToLog');
+    Route::get('logActivity', 'HomeController@logActivity');
+    //? ida nee Mak Rohan Husi Logs
+
+    //! ida nee Mak Route Husi Home
+    Route::get('/home', 'homeController@home');
+    //! Ida nee Mak Roha Husi Route Husi Home
+
+
+    Route::get('/Transaction', 'TrasactionController@index');
     Route::get('/Dadoscredito/delete/{id}', 'dadoscreditoController@delete');
+
     Route::post('/Dadoscredito/create', 'dadoscreditoController@create');
     Route::get('/Dadoscredito/edit/{id}', 'dadoscreditoController@edit');
     Route::post('/Dadoscredito/update/{id}', 'dadoscreditoController@update');
@@ -90,9 +106,23 @@ Route::group(['middleware' => ['auth', 'checkRole:admin,user']], function () {
     Route::get('sistema/print/extrato/{id}', 'printController@extrato');
 
     //todo ida nee Mak Rohan Husi Print
+    //! ida nee Mak husi Route Husi Conta Osan
+    Route::get('/contaosan', 'contaosanController@index');
+    Route::get('/contaosan/show', 'contaosanController@show');
+    Route::post('/contaosan/create', 'contaosanController@create');
+    Route::get('/contaosan/destroy/{id}', 'contaosanController@destroy');
+    Route::get('/contaosan/edit/{id}', 'contaosanController@edit');
+    Route::put('/contaosan/update/{id}', 'contaosanController@update');
+    //! ida nee Mak nia Rohan Husi Route
+
+    //? ida nee Mak Controller Husi Level Husi Credito
+    Route::get('/setting/level', 'levelCotroller@index');
+    Route::post('/setting/level/create', 'levelCotroller@create');
+    //? ida nee Mak Rohan Husi Level Credito
+
+    //todo Ida nee Mak Controller Husi Logs File
+    Route::get('/logs','logsController@logs');
+
+
+    //todo Ida nee Mak Roha Husi LogController
 });
-
-//! ida nee Mak husi Route Husi Conta Osan
-Route::get('/contaosan', 'contaosanController@index');
-
-//! ida nee Mak nia Rohan Husi Route
