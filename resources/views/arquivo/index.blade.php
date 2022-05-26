@@ -10,7 +10,8 @@
                     <div class="panel-heading">
                         <h3 class="panel-title text-center">Arquivo Husi Transferensia</h3>
                         <div class="left">
-                            <a href="{{ url('/arquivo/show')}}"><i class="bi bi-eye">Haree Arquivo</i></a>
+
+                            <a type="submit"  href="{{ url('/arquivo/show')}}" class="btn btn-primary">Haree Aquivo</a>
 
                         </div>
                     </div>
@@ -24,6 +25,12 @@
                             <button class="bg-success" style="padding: 30px;"><input type="file" class="form-control" placeholder="text field" name="arcivo"></button>
 
                         </div>
+                        @error('arcivo')
+                        <div class="is-invalid">
+                            <small class="text-danger">{{ $message }}</small>
+                        </div>
+
+                        @enderror
                         <br>
                         <label for="exampleInputEmail1">Naran Cliente </label>
 
@@ -36,17 +43,30 @@
 
 
                         </select>
+                        @error('credito_id')
+                        <div class="is-invalid">
+                            <small class="text-danger">{{ $message }}</small>
+                        </div>
+
+                        @enderror
                         <br>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Monatnte Osan Transferensia</label>
                             <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="montante_transfer">
+                            @error('montante_transfer')
+                            <div class="is-invalid mt-1">
+                                <small class="text-danger">{{ $message }}</small>
+                            </div>
 
                         </div>
+
+
+                        @enderror
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Commentario</label>
                             <input type="textl" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="comment">
-                            <small id="emailHelp" class="form-text text-muted">Ida nee Opsional Bele Husik Mamuk Ou Bele Prenche Bainhira La Importante</small>
+                            <small id="emailHelp" class="form-text text-danger text-muted">Ida nee Opsional Bele Husik Mamuk Ou Bele Prenche</small>
                           </div>
 
                            <div class="modal-footer">

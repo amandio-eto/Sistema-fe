@@ -27,12 +27,15 @@ class dadoscreditoController extends Controller
                 ->get();
         } else {
 
-            $app = credito::orderBy('id', 'ASC', 'naran', 'ASC')->get();
+            $app = credito::with('durasaun','osanfunan','setoran')->orderBy('id', 'ASC', 'naran', 'ASC')->get();
+
+
+
         }
 
 
 
-        $testing = $request->show;
+
         $saldo = saldo();
         $id = idcredito::all();
         $durasaun = durasaun::all();
@@ -44,7 +47,7 @@ class dadoscreditoController extends Controller
     public function report()
     {
 
-        $credito = credito();
+        $credito = credito::with('setoran')->get();
         return view('layout.report', compact('credito'));
     }
 
@@ -154,6 +157,26 @@ class dadoscreditoController extends Controller
 
         $app = credito::find($id);
         $app->update($request->all());
+
+        $user =Auth::User();
+        $name = $user->name;
+        $email = $user->email;
+        $role = $user->role;
+        $dt = Carbon::now();
+        $time = $dt->toDayDateTimeString();
+
+        $update = [
+
+            'username' => $name,
+            'email' => $email,
+            'role' => $role,
+            'user_modify' => 'User Update Dados Credito',
+            'status' => 'Update',
+            'date'=>$time,
+
+
+        ];
+        logs::create($update);
         return redirect('/Dadoscredito')->with('success', 'Dados Ita Boot Nia Dados Update Ona  ');
     }
 
@@ -203,10 +226,11 @@ class dadoscreditoController extends Controller
     public function detail($id)
     {
         $level = level::all();
-        $app = credito::find($id);
+        $app = credito::with('setoran','durasaun')->get()->find($id);
+        $arcivo = credito::find($id)->with('arcivo');
         $tempo = durasaun::orderBy('tempo', 'ASC')->get();
         $fulan = ($app->total_credito) / ($app->durasaun->tempo) + ($app->total_credito * $app->osanfunan->osanfunan);
         $conta = ($app->setoran->sum('update_selu')) / ($fulan * $app->durasaun->tempo);
-        return view('layout.detail', compact('app', 'fulan', 'conta', 'level', 'tempo'));
+        return view('layout.detail', compact('app', 'fulan', 'conta', 'level', 'tempo','arcivo'));
     }
 }

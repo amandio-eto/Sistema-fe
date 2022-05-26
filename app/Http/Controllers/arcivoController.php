@@ -14,7 +14,9 @@ class arcivoController extends Controller
     public function index()
     {
 
-        $data = credito::all();
+
+
+        $data = credito::get();
         return view('arquivo.index', compact('data'));
     }
     public function show()
@@ -22,13 +24,20 @@ class arcivoController extends Controller
 
 
 
-        $data = arcivo::all();
+        $data = arcivo::with('credito')->simplePaginate(5);
         return view('arquivo.show', compact('data'));
     }
 
     //! ida nee Mak Create Husi file Arquivo
     public function create(Request $request)
     {
+
+        $request->validate([
+            'arcivo' => 'required|mimes:jpeg,jpg,png',
+            'credito_id'=> 'required|numeric',
+            'montante_transfer' => 'required|numeric',
+
+        ]);
         $data = arcivo::create($request->all());
 
         if ($request->hasFile('arcivo')) {

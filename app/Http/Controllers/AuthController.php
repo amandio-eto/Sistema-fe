@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rules\Unique;
 
+
 class AuthController extends Controller
 {
     public function login()
@@ -27,6 +28,8 @@ class AuthController extends Controller
             'password' => 'required|string'
         ]);
         if(Auth::attempt($request->only('email', 'password'))) {
+
+
          $user =Auth::User();
         $email = $user->email;
         $name = $user->name;

@@ -20,12 +20,28 @@
     <container-fluid>
         <div class="row">
             <div class="col-md">
+
                 <div class="panel">
                     <div class="panel-heading">
+
+
                         <h2 class="panel-title text-center">Log File</h2>
+
                         <div class="right">
                             <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
                             <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-left: 10px;">
+                        <div class="col">
+                            <form class="navbar-form navbar-center" method="GET" action="{{ url('/logs') }}">
+                                <div class="input-group text-center">
+                                    <input type="text" name="buka" value="" class="form-control" placeholder="Buka "
+                                        name="cari">
+                                    <span class="input-group-btn"><button type="submit" class="btn btn-success"><i
+                                                class="bi bi-search"></i></button></span>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="panel-body no-padding">
@@ -58,12 +74,15 @@
 
                                     <td><span class="label label-danger">logout</span></td>
                                     @elseif ($log->status=='login')
-                                    <td><span class="label label-success">Login</span></td>
+                                    <td><span class="label label-success">login</span></td>
 
                                     @elseif ($log->status == 'Cria Dados Registo Credito Foun')
                                     <td><span class="label label-primary">Register</span></td>
                                     @elseif($log->status =='User Delete')
-                                    <td style="text-align: center;" style="text-aling:center;"><i class="text-danger bi bi-x-circle-fill"></i></td>
+                                    <td ><i class=" text-danger bi bi-x-octagon-fill"></i></td>
+
+                                    @elseif($log->status =='Update')
+                                    <td><i class="bi bi-pencil-square text-warning"></i></td>
 
 
                                     @endif

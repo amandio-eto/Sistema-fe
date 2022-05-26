@@ -10,7 +10,7 @@ class levelCotroller extends Controller
     public function index()
     {
 
-        $level = level::all();
+        $level = level::with('User')->get();
         return view('level.index_level', compact('level'));
     }
 

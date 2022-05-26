@@ -90,10 +90,28 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::get('/setting/osan/delete/{id}', 'saldoController@delete');
 
     //!  ida nee Mak Rohan Husi Sistema Fe
+
+    Route::get('/contaosan/destroy/{id}', 'contaosanController@destroy');
+    Route::get('/contaosan/edit/{id}', 'contaosanController@edit');
+    Route::put('/contaosan/update/{id}', 'contaosanController@update');
+    //! ida nee Mak nia Rohan Husi Route
+
+    //? ida nee Mak Controller Husi Level Husi Credito
+    Route::get('/setting/level', 'levelCotroller@index');
+    Route::post('/setting/level/create', 'levelCotroller@create');
+    //? ida nee Mak Rohan Husi Level Credito
+
+    //todo Ida nee Mak Controller Husi Logs File
+    Route::get('/logs','logsController@logs');
+
+
+    //todo Ida nee Mak Roha Husi LogController
 });
 
-Route::group(['middleware' => ['auth', 'checkRole:admin,user']], function () {
 
+//todo ida nee Mak Middleware Ba Iha User Sira nebe Acesso ba IHa Sistema Fundu Esperanca
+Route::group(['middleware' => ['auth', 'checkRole:admin,user']], function () {
+    Route::get('/home', 'homeController@home');
     Route::post('/setting/osan/create', 'saldoController@create');
     Route::get('/setting/osan', 'saldoController@index');
     Route::get('/Dasboard', 'dasboardController@index');
@@ -110,19 +128,5 @@ Route::group(['middleware' => ['auth', 'checkRole:admin,user']], function () {
     Route::get('/contaosan', 'contaosanController@index');
     Route::get('/contaosan/show', 'contaosanController@show');
     Route::post('/contaosan/create', 'contaosanController@create');
-    Route::get('/contaosan/destroy/{id}', 'contaosanController@destroy');
-    Route::get('/contaosan/edit/{id}', 'contaosanController@edit');
-    Route::put('/contaosan/update/{id}', 'contaosanController@update');
-    //! ida nee Mak nia Rohan Husi Route
 
-    //? ida nee Mak Controller Husi Level Husi Credito
-    Route::get('/setting/level', 'levelCotroller@index');
-    Route::post('/setting/level/create', 'levelCotroller@create');
-    //? ida nee Mak Rohan Husi Level Credito
-
-    //todo Ida nee Mak Controller Husi Logs File
-    Route::get('/logs','logsController@logs');
-
-
-    //todo Ida nee Mak Roha Husi LogController
 });

@@ -19,7 +19,7 @@
                 <div class="profile-stat">
                     <div class="row">
                         <div class="col-md-4 stat-item">
-                            <span>Numeru Husi Setor : {{ $app->setoran->count() }}</span>
+                            <span>Numeru Husi Setor : {{ $app->count() }}</span>
                         </div>
                         <div class="col-md-4 stat-item">
                              <span>Total Setoran : {{ osan($app->setoran->sum('update_selu') )}}</span>
@@ -368,7 +368,7 @@
 
 
 
-                                @foreach ($app->arcivo as $data)
+                                @foreach ($arcivo as $data)
 
                                 <tr>
                                     <td><a href="#">{{ $loop->iteration }}</a></td>

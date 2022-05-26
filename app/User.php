@@ -45,7 +45,7 @@ class User extends Authenticatable
     //? ida nee Mak Relasi Antara Table User ho Level
     public function level()
     {
-        return $this->hasMany(level::class, 'user_id');
+        return $this->hasOne(level::class, 'user_id');
     }
 
     //! ida nee Mak Relasaun entre user ho Iha ContaOsan

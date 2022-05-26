@@ -114,7 +114,7 @@
                                 <td>{{ $data->code }}</td>
                                 <td>{{ $data->level }}</td>
                                 <td>{{ date('d-F-Y',strtotime($data->created_at)) }}</td>
-                                <td>{{ $data->User->name }}</td>
+                                <td>{{ $data->name }}</td>
                                 <td>
 
                                     <a href=""> <i class="text-warning bi bi-pencil-square"></i></a>
