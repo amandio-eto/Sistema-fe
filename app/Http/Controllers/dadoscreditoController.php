@@ -4,8 +4,10 @@
 
 namespace App\Http\Controllers;
 
+use App\arcivo;
 use Illuminate\Http\Request;
 use \App\credito;
+use App\double;
 use \App\saldoosan;
 use \App\durasaun;
 use \App\idcredito;
@@ -27,7 +29,7 @@ class dadoscreditoController extends Controller
                 ->get();
         } else {
 
-            $app = credito::with('durasaun','osanfunan','setoran')->orderBy('id', 'ASC', 'naran', 'ASC')->get();
+            $app = credito::with('durasaun','osanfunan','setoran','osanfunan')->orderBy('id', 'ASC', 'naran', 'ASC')->get();
 
 
 
@@ -226,11 +228,14 @@ class dadoscreditoController extends Controller
     public function detail($id)
     {
         $level = level::all();
+        $doubles = double::with('credito')->get();
+        //todo Ida nee Mak Rohan Husi Ida nee Mak Rohan Husi Double
+        $arcivo = arcivo::all();
         $app = credito::with('setoran','durasaun')->get()->find($id);
-        $arcivo = credito::find($id)->with('arcivo');
+        $osan = osanfunan::all();
         $tempo = durasaun::orderBy('tempo', 'ASC')->get();
         $fulan = ($app->total_credito) / ($app->durasaun->tempo) + ($app->total_credito * $app->osanfunan->osanfunan);
         $conta = ($app->setoran->sum('update_selu')) / ($fulan * $app->durasaun->tempo);
-        return view('layout.detail', compact('app', 'fulan', 'conta', 'level', 'tempo','arcivo'));
+        return view('layout.detail', compact('app', 'fulan', 'conta', 'level', 'tempo','arcivo','osan','doubles'));
     }
 }

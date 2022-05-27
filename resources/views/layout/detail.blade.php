@@ -76,9 +76,12 @@
 
             <div class="left">
                 <!-- Button trigger modal -->
+                @if (numero($conta*100) >= 99)
                 <button type="button" class="btn btn-success m-2" data-toggle="modal" data-target="#exampleModal" style="margin:4px;">
                     Double <i class="bi bi-plus-circle"></i>
                 </button>
+
+                @endif
 
                 <p>Update Persentage Setoran {{$sura = numero($conta*100)  }}</p>
 <!-- Modal -->
@@ -86,46 +89,41 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Credito Double Iha Sistema Fundu Esperanca</h5>
         <button  type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span style="padding:6px;background;red;" aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form  action="{{ url('/credito/double') }}" method="POST">
+            @csrf
             <div class="form-group">
-              <label for="exampleInputEmail1">Level</label>
+                <input type="hidden" value="{{ $app->id }}" name="credito_id">
 
-              <select class="form-control" name="level_id">
-                <option value="cheese" > ----Favor Hili----</option>
-                @foreach($level as $levels)
 
-                <option value="{{ $levels->id }}">{{ $levels->code }}- <span style="padding=2px;background:red;">{{ $levels->level }}</span></option>
-                @endforeach
-            </select>
 
                 <label for="" style="margin-top: 13px;">Durasaun :</label>
-                @foreach ($tempo as $time )
 
+                @foreach ($tempo as $time )
                 <div class="form-check form-check-inline text-center" style="margin: 10px;display:inline; padding:4px;" >
-                    <input class="form-check-input" type="radio" name="durasaun" id="" value="option1" id="durasaun">
+                    <input class="form-check-input" type="radio" name="durasaun_id" value="{{$time->id }}">
                     <label style="padding:6px;color:white; background:#00AAFF;height:30px;width:30px;border-radius:100%;" class="form-check-label" for="inlineRadio1">{{ $time->tempo }}</label>
-               </div>
-                  @endforeach
+                </div>
+                @endforeach
 
             <div class="form-group">
-              <label for="exampleInputPassword1">Montante Credito Osan</label>
-              <input type="number" class="form-control" id="montante" name="montante">
+              <label for="exampleInputPassword1">Montante Imprestimo</label>
+              <input type="number" class="form-control" id="montante" name="t_imprestimo">
             </div>
 
-            <div class="form-group">
-                <label for="exampleInputPassword1">Total Dividas</label>
-                <input type="number" id="totaldividas"  class="form-control" name="total_dividas">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Setoran Mensal</label>
-                <input type="number" id="setoranmensal" class="form-control" >
-              </div>
+
+              <label class="fancy-checkbox">
+                  @foreach($osan as $money)
+                <input value="{{$money->id  }}" type="checkbox" name="osanfunan_id">
+
+                <span>{{ $money->osanfunan }}</span>
+                @endforeach
+            </label>
 
 
 
@@ -137,11 +135,11 @@
 
             <div class="form-group">
                 <label for="exampleInputPassword1">Data</label>
-                <input type="date" class="form-control" id="exampleInputPassword1">
+                <input type="date" name="date" class="form-control" id="exampleInputPassword1">
               </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Taka</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">Save</button>
               </div>
           </form>
       </div>
@@ -206,73 +204,95 @@
                             <th scope="col">Osan Inan </th>
                             <th scope="col">Jurus Mensal</th>
                             <th scope="col">Total Deposito Mensal </th>
+                            <th scope="col">Data Credito </th>
+                            <th scope="col">Status</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
-                            <th scope="row">1</th>
-                            <td>{{ osan($app->total_credito )}}</td>
-                            <td>{{osan(( $test = $app->total_credito)/($app->durasaun->tempo))}}</td>
-                            <td>{{ osan($osan = $app->total_credito * $app->osanfunan->osanfunan )}}</td>
-                            <td>{{ osan( ($app->total_credito)/($app->durasaun->tempo)+$osan)}}</td>
-                          </tr>
+                              <th scope="row">1</th>
+                              <td>{{ osan($app->total_credito )}}</td>
+                              <td>{{osan(( $test = $app->total_credito)/($app->durasaun->tempo))}}</td>
+                              <td>{{ osan($osan = $app->total_credito * $app->osanfunan->osanfunan )}}</td>
+                              <td>{{ osan( ($app->total_credito)/($app->durasaun->tempo)+$osan)}}</td>
+                              <td> Amandio</td>
+
+
+                            </tr>
+
+
+
+                            @foreach ($app->double as $double )
+                            <tr>
+
+                                <td>{{ $double->credito->naran }}</td>
+                                <td>{{ $double->t_imprestim }}</td>
+                                <td>{{ $double->t_imprestimo }}</td>
+                                <td>{{ $double->t_imprestimo }}</td>
+
+
+
+                            </tr>
+                            @endforeach
 
                         </tbody>
                       </table>
                 </div>
 
-                <div class="row">
-
-                    <table class="table table-bordered">
-
-                        <thead class="bg-primary text-center">
+                 <div class="row">
+                        <table class="table table-bordered">
+                            <thead class="bg-primary text-center">
 
 
+                                <tr>
+                                    <th>N<span><sup style="text-style:underline">0</sup></span> </th>
+                                    <th>Nu Extrato</th>
+                                    <th>Code Setoran </th>
+                                    <th>Update Setor </th>
+                                    <th>Montante </th>
+                                    <th>Status</th>
+
+                                    <th>Metode Selu</th>
+                                    <th>Data Setor</th>
+                                    <th>Aksaun </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                            @foreach ($app->setoran as $data)
                             <tr>
-                                <th>N<span><sup style="text-style:underline">0</sup></span> </th>
-                                <th>Nu Extrato</th>
-                                <th>Code Setoran </th>
-                                <th>Update Setor </th>
-                                <th>Montante </th>
-                                <th>Status</th>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>FE-00{{ $loop->iteration}}</td>
+                                <td> {{ $data->credito->naran }}-{{ $data->credito->clientid }}</td>
+                                <td>${{ $data->update_selu }}</td>
+                                <td> <span style="background: yellow; border-radius:20px;color:black; padding:6px;font-size:12px;">{{ $data->status }}</span> </td>
+                                <td>{{ $data->pending }}</td>
+                                <td>{{ $data->selu }}</td>
 
-                                <th>Metode Selu</th>
-                                <th>Data Setor</th>
-                                <th>Aksaun </th>
+                                <td>{{ date('d-F-Y', strtotime($data->data))}}</td>
+                                <td>
+
+                                    @if(auth()->user()->role == 'admin')
+                                    <a href="{{ url('/setoran/edit/'.$data->id) }}"><i class="bi-pen text-warning "></i></a>
+                                    <a href="{{ url('/setoran/delete/'.$data->id) }}"><i class="bi-trash3-fill text-danger"></i></a>
+                                    @endif
+                                    <a href="{{ url('/sistema/print/'.$data->id) }}"><i class="bi bi-printer-fill"></i></a>
+
+                                </td>
+
+
+
+
+
                             </tr>
-                        </thead>
-                        <tbody>
-
-
-                        @foreach ($app->setoran as $data)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>FE-00{{ $loop->iteration}}</td>
-                            <td> {{ $data->credito->naran }}-{{ $data->credito->clientid }}</td>
-                            <td>${{ $data->update_selu }}</td>
-                            <td> <span style="background: yellow; border-radius:20px;color:black; padding:6px;font-size:12px;">{{ $data->status }}</span> </td>
-                            <td>{{ $data->pending }}</td>
-                            <td>{{ $data->selu }}</td>
-
-                            <td>{{ date('d-F-Y', strtotime($data->data))}}</td>
-                            <td>
-
-                                @if(auth()->user()->role == 'admin')
-                                <a href="{{ url('/setoran/edit/'.$data->id) }}"><i class="bi-pen text-warning "></i></a>
-                                <a href="{{ url('/setoran/delete/'.$data->id) }}"><i class="bi-trash3-fill text-danger"></i></a>
-                                @endif
-                                <a href="{{ url('/sistema/print/'.$data->id) }}"><i class="bi bi-printer-fill"></i></a>
-
-                            </td>
-
-
-                        </tr>
-                        @endforeach
+                            @endforeach
 
 
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+
 
 
 
@@ -382,8 +402,9 @@
                                                 <span>100%</span>
                                             </div>
                                         </div>
+                                    <td>${{ date('d-F-Y',strtotime($data->created_at)) }}</td>
                                     </td>
-                                    <td></td>
+                                     <td><a href="{{ url('/arquivo/delete/'.$data->id) }}"><i class="bi bi-trash3 text-danger"></i></a></td>
 
 
                                 </tr>

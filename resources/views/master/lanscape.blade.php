@@ -2,7 +2,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="brand">
         {{--  <a href="index.html"><img src="assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>  --}}
-        <h4>Sistema Fundu Esperanca</h4>
+        <h4>{{ 'amandio' }}</h4>
     </div>
     <div class="container-fluid">
         <div class="navbar-btn">

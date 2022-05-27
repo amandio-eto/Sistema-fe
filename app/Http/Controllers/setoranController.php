@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\credito;
+use App\logs;
 use App\osanfunan;
 use App\setoran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+
 
 class setoranController extends Controller
 {
@@ -18,6 +22,32 @@ class setoranController extends Controller
     public function create(Request $request)
     {
         $data = setoran::create($request->all());
+
+        $user =Auth::User();
+        $email = $user->email;
+        $name = $user->name;
+        $role = $user->role;
+
+
+
+
+        $dt = Carbon::now();
+        $time = $dt->toDayDateTimeString();
+
+
+
+        $selusetor= [
+
+            'username' => $name,
+            'email' => $email,
+            'role' => $role,
+            'status' => 'Setor',
+            'user_modify' => 'Update Client Nia Selu Setor',
+            'date'=>$time,
+
+
+        ];
+        logs::create($selusetor);
         return redirect('/Dadoscredito')->with('success', 'Ita Boot Nia Dados nia Cria Ona ho Successo');
     }
 
@@ -42,6 +72,31 @@ class setoranController extends Controller
 
         $edit =  setoran::find($id);
         $edit->update($request->all());
+        $user =Auth::User();
+        $email = $user->email;
+        $name = $user->name;
+        $role = $user->role;
+
+
+
+
+        $dt = Carbon::now();
+        $time = $dt->toDayDateTimeString();
+
+
+
+        $selusetor= [
+
+            'username' => $name,
+            'email' => $email,
+            'role' => $role,
+            'status' => 'Update',
+            'user_modify' => 'Update Client Nia Montante Setor',
+            'date'=>$time,
+
+
+        ];
+        logs::create($selusetor);
         return redirect('/Dadoscredito')->with('success', 'Ita Boot Nia Dados Update Ona Ho Sucesso');
     }
     public function delete($id)
@@ -49,7 +104,32 @@ class setoranController extends Controller
 
         $delete =  setoran::find($id);
         $delete->delete($delete);
-        $osan = osanfunan::all();
+
+        $user =Auth::User();
+        $email = $user->email;
+        $name = $user->name;
+        $role = $user->role;
+
+
+
+
+        $dt = Carbon::now();
+        $time = $dt->toDayDateTimeString();
+
+
+
+        $selusetor= [
+
+            'username' => $name,
+            'email' => $email,
+            'role' => $role,
+            'status' => 'User Delete',
+            'user_modify' => 'User Delete Selu Setor',
+            'date'=>$time,
+
+
+        ];
+        logs::create($selusetor);
         return redirect('/Dadoscredito')->with('success', 'Ita Boot Nia Dados Hamos Oan Ho Sucesso');
     }
 

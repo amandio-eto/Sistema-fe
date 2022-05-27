@@ -103,9 +103,11 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
 
     //todo Ida nee Mak Controller Husi Logs File
     Route::get('/logs','logsController@logs');
-
-
     //todo Ida nee Mak Roha Husi LogController
+
+    //? ida nee mak Group Husi Controller Double
+    Route::post('/credito/double','doubleController@create');
+    //? ida nee mak Rohan Husi DoubleController
 });
 
 

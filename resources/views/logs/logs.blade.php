@@ -83,6 +83,8 @@
 
                                     @elseif($log->status =='Update')
                                     <td><i class="bi bi-pencil-square text-warning"></i></td>
+                                    @elseif ($logs->status= 'Setor')
+                                    <td><i class="bi bi-currency-exchange text-dark"></i></td>
 
 
                                     @endif

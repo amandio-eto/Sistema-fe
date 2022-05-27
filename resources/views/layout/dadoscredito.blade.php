@@ -305,7 +305,7 @@ text-transform:uppercase;
                         <tr>
                         <td>{{ $loop->iteration}}</td>
                         <td> <img src="{{ asset ('images/'.$data->foto) }}" width="40" height="40" > </td>
-                        <td>{{ $data->clientid }}</td>
+                        <td>{{ str_pad($data->clientid,3,"-") }}</td>
                         <td>{{ $data->naran }}</td>
                         <td>{{ osan($total_credito=$data->total_credito) }}</td>
                         <td>{{ osan(($progress=$data->osancredito())) }}</td>

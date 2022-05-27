@@ -12,6 +12,6 @@ class arcivo extends Model
     //! ida nee Halo Relsaun Ba Iha Data Base iha iha Dados Credito
     public function credito()
     {
-        return $this->belongsTo(credito::class,'credito_id');
+        return $this->belongsTo(credito::class);
     }
 }
