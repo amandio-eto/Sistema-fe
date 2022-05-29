@@ -63,10 +63,9 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td><img src="{{ asset('images/'.$arq->arcivo) }}" width="100px;" alt=""></td>
-                            <td style="text-transform: uppercase">{{ $arq->credito->naran }}</td>
+                            <td style="text-transform: uppercase">{{ optional($arq->credito)->naran }}</td>
                             <td>${{ $arq->montante_transfer }}</td>
                             <td>{{ $arq->comment }}</td>
-                            <td>{{ $arq->credito_id }}</td>
                             <td>Fe-00{{ $loop->iteration }}</td>
                             <td>{{ $arq->created_at->format('D,F,Y') }}</td>
                             <td> <i class="fa fa-download"></i></td>
@@ -85,7 +84,7 @@
             <div class="panel-footer">
                 <div class="row">
 
-                    {{--  <div class="col-md-6 text-right">{{ $data->links()}}</div>  --}}
+                    <div class="col-md-6 text-right">{{ $data->links()}}</div>
 
                 </div>
             </div>

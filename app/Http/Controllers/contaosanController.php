@@ -18,8 +18,7 @@ class contaosanController extends Controller
     {
         contaosan::create($request->all());
         $dt = Carbon::now();
-$data = $dt->toDateString();
-        dd($data);
+        $data = $dt->toDateString();
         return back();
     }
 

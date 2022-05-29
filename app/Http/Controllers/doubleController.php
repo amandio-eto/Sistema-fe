@@ -2,44 +2,100 @@
 
 namespace App\Http\Controllers;
 
+use App\credito;
+use App\double;
+use App\durasaun;
+use App\osanfunan;
 use Illuminate\Http\Request;
-use PhpParser\Node\Expr\Cast\Double;
-use \App\credito;
-use App\double as AppDouble;
 
 class doubleController extends Controller
 {
-    public function create(Request $request, $id)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-        //todo Ida nee Mak Usa Ba Iha Variable Dados Double
-
-        $credito_id =  $request->credito_id;
-        $durasaun_id = $request->durasaun_id;
-        $osanfunan_id = $request->osanfunan_id;
-        $t_imprestimo = $request->t_imprestimo;
-        $aprovado = 1;
 
 
-        //todo Ida nee Ma Rohan Husi Double Iha Sistema Fundu Esperaca
-        $cria  = [
+        $credito =credito::all();
+        $durasaun = durasaun::OrderBy('tempo','ASC')->get();
+        $osanfunan = osanfunan::all();
+         $doubles = double::with('credito','durasaun')->get();
 
-            'credito_id' => $credito_id,
-            'durasaun_id' => $durasaun_id,
-            'osanfunan_id' => $osanfunan_id,
-            't_imprestimo' => $t_imprestimo,
-            'aprovado' => $aprovado
-        ];
+        //  $totalcredito = $osaninan + ();
+        return view('double.index_double',compact('credito','durasaun','osanfunan','doubles'));
+    }
+
+    /**
+
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //todo Ida nee mak Create Double
+       double::create(request()->all());
 
 
-        \App\double::create($cria);
         return back();
+        //todo Ida nee Mak Roha Husi Creat Double
+    }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show()
+    {
+        return 'amandii';
+    }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
 
-
-
-
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 }

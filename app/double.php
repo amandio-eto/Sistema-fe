@@ -14,20 +14,24 @@ class double extends Model
         'osanfunan_id',
         't_imprestimo',
         'date',
-        'aprovado'
+
 
     ];
     public function credito(){
         return $this->belongsTo(credito::class);
     }
 
-    // public function durasaun(){
-    //     return $this->HasOne(durasaun::class);
+    public function durasaun(){
+        return $this->belongsTo(durasaun::class);
 
-    // }
+    }
 
-    // public function osanfunan(){
-    //     return $this->hasOne(osanfunan::class);
-    // }
+    public function osanfunan(){
+        return $this->belongsTo(osanfunan::class);
+    }
+
+    public function doubletem(){
+        return $this->hasMany(doubletem::class,'double_id');
+    }
 
 }

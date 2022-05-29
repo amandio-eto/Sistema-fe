@@ -14,4 +14,9 @@ class osanfunan extends Model
     {
         return $this->hasMany(credito::class);
     }
+
+    public function double()
+    {
+        return $this->hasMany(credito::class);
+    }
 }

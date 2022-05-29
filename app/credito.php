@@ -28,7 +28,7 @@ class credito extends Model
     //? ida nee  Halo Relasaun Database Ba Iha arcivu
     public function arcivo()
     {
-        return $this->hasMany(arcivo::class);
+        return $this->hasMany(arcivo::class,'credito_id');
     }
     //! ida nee Halo Link Ho Durasaun
     public function durasaun()
@@ -71,10 +71,10 @@ class credito extends Model
     }
 
 
-    public function double()
-    {
+    // public function double()
+    // {
 
-        return $this->hasMany(double::class);
-    }
+    //     return $this->hasMany(double::class);
+    // }
 
 }

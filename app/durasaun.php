@@ -13,4 +13,10 @@ class durasaun extends Model
     {
         return $this->hasMany(credito::class);
     }
+
+    public function double()
+    {
+        return $this->hasMany(double::class,'durasaun_id');
+    }
 }
+

@@ -81,72 +81,19 @@
                     Double <i class="bi bi-plus-circle"></i>
                 </button>
 
+                <button type="button" class="btn btn-success m-2" data-toggle="modal" data-target="#exampleModal" style="margin:4px;">
+                    Aprovado Credito <i class="bi bi-plus-circle"></i>
+                </button>
+
                 @endif
 
                 <p>Update Persentage Setoran {{$sura = numero($conta*100)  }}</p>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Credito Double Iha Sistema Fundu Esperanca</h5>
-        <button  type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span style="padding:6px;background;red;" aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form  action="{{ url('/credito/double') }}" method="POST">
-            @csrf
-            <div class="form-group">
-                <input type="hidden" value="{{ $app->id }}" name="credito_id">
-
-
-
-                <label for="" style="margin-top: 13px;">Durasaun :</label>
-
-                @foreach ($tempo as $time )
-                <div class="form-check form-check-inline text-center" style="margin: 10px;display:inline; padding:4px;" >
-                    <input class="form-check-input" type="radio" name="durasaun_id" value="{{$time->id }}">
-                    <label style="padding:6px;color:white; background:#00AAFF;height:30px;width:30px;border-radius:100%;" class="form-check-label" for="inlineRadio1">{{ $time->tempo }}</label>
-                </div>
-                @endforeach
-
-            <div class="form-group">
-              <label for="exampleInputPassword1">Montante Imprestimo</label>
-              <input type="number" class="form-control" id="montante" name="t_imprestimo">
-            </div>
-
-
-              <label class="fancy-checkbox">
-                  @foreach($osan as $money)
-                <input value="{{$money->id  }}" type="checkbox" name="osanfunan_id">
-
-                <span>{{ $money->osanfunan }}</span>
-                @endforeach
-            </label>
 
 
 
 
 
-
-
-
-
-            <div class="form-group">
-                <label for="exampleInputPassword1">Data</label>
-                <input type="date" name="date" class="form-control" id="exampleInputPassword1">
-              </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Taka</button>
-                <button type="submit" class="btn btn-primary">Save</button>
-              </div>
-          </form>
-      </div>
-
-    </div>
-  </div>
-</div>
             </div>
 
           @if (numero($conta*100) == numero(100) )
@@ -178,9 +125,9 @@
                      <h4 style="font-weight: 1000;">Total Setoran :{{ osan($persen=$app->setoran->sum('update_selu')) }}</h4>
                  </div>
 
-                 <div class="col-md-2 text-left" >
+                 <!-- <div class="col-md-2 text-left" >
                     <h4 style="font-weight: 1000;">Durasaun : {{ $app->durasaun->tempo }} </h4>
-                </div>
+                </div> -->
                 <div class="col-md-2 text-left" >
                     <h4 style="font-weight: 1000;">Total Dividas : {{osan($fulan*$app->durasaun->tempo) }} </h4>
                 </div>
@@ -202,6 +149,7 @@
                             <th scope="col">Nu</th>
                             <th scope="col">Total Credito</th>
                             <th scope="col">Osan Inan </th>
+                                <th scope="col">Durasaun</th>
                             <th scope="col">Jurus Mensal</th>
                             <th scope="col">Total Deposito Mensal </th>
                             <th scope="col">Data Credito </th>
@@ -212,6 +160,7 @@
                           <tr>
                               <th scope="row">1</th>
                               <td>{{ osan($app->total_credito )}}</td>
+
                               <td>{{osan(( $test = $app->total_credito)/($app->durasaun->tempo))}}</td>
                               <td>{{ osan($osan = $app->total_credito * $app->osanfunan->osanfunan )}}</td>
                               <td>{{ osan( ($app->total_credito)/($app->durasaun->tempo)+$osan)}}</td>
@@ -222,18 +171,20 @@
 
 
 
-                            @foreach ($app->double as $double )
+                            {{--  @foreach ($app->double as $double )
                             <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{ osan($double->t_imprestimo )}}</td>
+                                <td>{{ $app->durasaun->tempo }}</td>
+                                <td></td>
 
-                                <td>{{ $double->credito->naran }}</td>
-                                <td>{{ $double->t_imprestim }}</td>
                                 <td>{{ $double->t_imprestimo }}</td>
                                 <td>{{ $double->t_imprestimo }}</td>
 
 
 
                             </tr>
-                            @endforeach
+                            @endforeach  --}}
 
                         </tbody>
                       </table>
@@ -264,7 +215,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>FE-00{{ $loop->iteration}}</td>
-                                <td> {{ $data->credito->naran }}-{{ $data->credito->clientid }}</td>
+                                <td></td>
                                 <td>${{ $data->update_selu }}</td>
                                 <td> <span style="background: yellow; border-radius:20px;color:black; padding:6px;font-size:12px;">{{ $data->status }}</span> </td>
                                 <td>{{ $data->pending }}</td>
@@ -388,14 +339,14 @@
 
 
 
-                                @foreach ($arcivo as $data)
+                                @foreach ($app->arcivo as $data)
 
                                 <tr>
-                                    <td><a href="#">{{ $loop->iteration }}</a></td>
+                                    <td><a href="#">{{$loop->iteration }}</a></td>
                                     <td><img src="{{ asset('images/'.$data->arcivo) }}" width="50;" alt=""></td>
-                                    <td>{{ $data->credito->naran }}</td>
-                                    <td>FE-00{{ $loop->iteration }}</td>
-                                    <td>${{ $data->montante_transfer }}</td>
+                                    <td>{{ $data->naran }}</td>
+                                    <td>{{ $data->montante_transfer }}</td>
+                                    <td>{{ $data->montante_transfer }}</td>
                                     <td>
                                         <div class="progress">
                                             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">

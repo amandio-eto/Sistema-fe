@@ -128,9 +128,9 @@ text-transform:uppercase;
 
                 </div>
 
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger">Save changes</button>
+                    <div class="modal-footer text-left" >
+                    <button style="margin-top:20px;" type="button" class="btn btn-danger" data-dismiss="modal"><i class="bi bi-x" ></i> Calcela</button>
+                    <button style="margin-top:20px;" type="submit" class="btn btn-success"><i class="bi bi-check-lg"></i> Cria</button>
                     </div>
         </form>
       </div>
@@ -151,72 +151,106 @@ text-transform:uppercase;
                     </div>
                     @endif
 
-                <div class="col-md ">
-                    <h3 class="text-center"> UTILIZADORES</h3>
-                    <table class="table table-hover" border="1">
-                        <thead>
-                          <tr class="thead">
-                            <th scope="col"><span class="lnr lnr-book"></span> Nu</th>
-                            <th scope="col">
-                                <span class="lnr lnr-picture"></span>
-                                 Foto</th>
-                            <th scope="col"><span class="lnr lnr-user"></span> Naran Completo</th>
-                            <th scope="col"><span class="lnr lnr-envelope"></span> E-Mail</th>
-                            <th scope="col">
-                                <span class="lnr lnr-users"></span>
-                                Role</th>
-                                <th scope="col">
-                                    <span class="lnr lnr-pushpin"></span>
-                                     Status Account</th>
+                    <div class="row">
+
+                        <div class="container">
+
+                            <div class="row">
+
+                                <div class="panel">
+
+                                    <div class="panel-heading">
+
+                                        <h2 class="panel-title text-center">Utilizadores</h2>
+
+                                    </div>
 
 
-                            <th scope="col"><i class="fa fa-calendar"></i> Status Cria Conta</th>
-                            <th scope="col">
-                                <span class="lnr lnr-menu-circle"></span>
-                            Profile</th>
-                            <th scope="col">
-                                <span class="lnr lnr-menu-circle"></span>
-                            Aksaun</th>
+                                    <div class="row">
+                                    </div>
 
-                          </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($data as $user)
+                                        <!-- Modal -->
 
 
-                          <tr border="">
-                            <td >{{ $loop->iteration }}</td>
-                            <td><img src="{{ asset('images/'.$user->foto) }}" alt="" style="width: 40px;height:40px;border:1px solid black;"></td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td class="badge badge-success">{{ $user->role }}</td>
-                            <td>
-                                <input type="checkbox" data-toggle="toggle" data-on="Hamate" data-off="Hamoris">
-                                </td>
 
-                            <td>{{ $user->created_at->format('D,F Y') }} <span> <small class="text-waring">{{ $user->created_at->diffForHumans()}} </small></span></td>
-                        </td>
-                        @if($user->role=='admin')
 
-                            <td><i style="padding: 5px;background:#41b314;color:white;border-radius:100%;" class="bi bi-people"></i></td>
-                        @endif
 
-                        @if($user->role=='user')
+                                    <div class="panel-body no-padding">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr >
+                                                  <th scope="col"><span class="lnr lnr-book"></span> Nu</th>
+                                                  <th scope="col">
+                                                      <span class="lnr lnr-picture"></span>
+                                                       Foto</th>
+                                                  <th scope="col"><span class="lnr lnr-user"></span> Naran Completo</th>
+                                                  <th scope="col"><span class="lnr lnr-envelope"></span> E-Mail</th>
+                                                  <th scope="col">
+                                                      <span class="lnr lnr-users"></span>
+                                                      Role</th>
+                                                      <th scope="col">
+                                                          <span class="lnr lnr-pushpin"></span>
+                                                           Status Account</th>
 
-                        <td><i widht:8; height:8; style="padding: 5px;background:rgba(0,183,255);color:white;border-radius:100%;" class="bi bi-person"></i></td>
-                    @endif
-                            <td>
-                                <a  href="{{ url('/auth/create/user/edit/'.$user->id) }}"> <i class="lnr lnr-pencil text-warning"></i> </a>
-                                <a href="{{ url('/auth/create/user/delete/'.$user->id) }}"> <i class="lnr lnr-trash text-danger"></i> </a>
 
-                          </tr>
+                                                  <th scope="col"><i class="fa fa-calendar"></i> Status Cria Conta</th>
+                                                  <th scope="col">
+                                                      <span class="lnr lnr-menu-circle"></span>
+                                                  Profile</th>
+                                                  <th scope="col">
+                                                      <span class="lnr lnr-menu-circle"></span>
+                                                  Aksaun</th>
 
-                          @endforeach
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                  @foreach ($data as $user)
 
-                        </tbody>
-                      </table>
 
-                  </div>
+                                                <tr border="">
+                                                  <td >{{ $loop->iteration }}</td>
+                                                  <td><img src="{{ asset('images/'.$user->foto) }}" alt="" style="width: 40px;height:40px;border:1px solid black;"></td>
+                                                  <td>{{ $user->name }}</td>
+                                                  <td>{{ $user->email }}</td>
+                                                  <td class="badge badge-success">{{ $user->role }}</td>
+                                                  <td>
+                                                      <input type="checkbox" data-toggle="toggle" data-on="Hamate" data-off="Hamoris">
+                                                      </td>
+
+                                                  <td>{{ $user->created_at->format('D,F Y') }} <span> <small class="text-waring">{{ $user->created_at->diffForHumans()}} </small></span></td>
+                                              </td>
+                                              @if($user->role=='admin')
+
+                                                  <td><i style="padding: 5px;background:#41b314;color:white;border-radius:100%;" class="bi bi-people"></i></td>
+                                              @endif
+
+                                              @if($user->role=='user')
+
+                                              <td><i widht:8; height:8; style="padding: 5px;background:rgba(0,183,255);color:white;border-radius:100%;" class="bi bi-person"></i></td>
+                                            @endif
+                                                  <td>
+                                                      <a  href="{{ url('/auth/create/user/edit/'.$user->id) }}"> <i class="lnr lnr-pencil text-warning"></i> </a>
+                                                      <a href="{{ url('/auth/create/user/delete/'.$user->id) }}"> <i class="lnr lnr-trash text-danger"></i> </a>
+
+                                                </tr>
+
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                        <div class="row">
+                                            <div class="col-md text-center">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                        </div>
+
+
+
+                    </div>
                 </div>
             </div>
         </div>

@@ -108,6 +108,13 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     //? ida nee mak Group Husi Controller Double
     Route::post('/credito/double','doubleController@create');
     //? ida nee mak Rohan Husi DoubleController
+
+    //todo ida nee mak We Route Husi Recredito Ou Credito Double
+
+    Route::resource('recredito', doubleController::class);
+
+
+    //todo ida nee Mak Rohan Husi Recrito Husi Sistema Husi FE
 });
 
 
