@@ -2,43 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\credito;
 use App\double;
-use App\durasaun;
-use App\osanfunan;
 use App\tbtsm;
 use Illuminate\Http\Request;
 
-class doubleController extends Controller
+class tbtsmController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-     {
-        $credito = credito::all();
-        $doubles = double::with('credito','durasaun')->get();
-        $durasaun = durasaun::OrderBy('tempo','ASC')->get();
-        $osanfunan = osanfunan::all();
-
-        //  $totalcredito = $osaninan + ();
-        return view('double.index_double',compact('credito','durasaun','osanfunan','doubles'));
+    public function index()
+    {
+        //
     }
 
     /**
-
+     * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //todo Ida nee mak Create Double
-       double::create(request()->all());
-       return back();
 
-        //todo Ida nee Mak Roha Husi Creat Double
+        return back();
     }
 
     /**
@@ -58,10 +46,9 @@ class doubleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-
-
+        //
     }
 
     /**

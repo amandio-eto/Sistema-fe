@@ -228,14 +228,13 @@ class dadoscreditoController extends Controller
     public function detail($id)
     {
 
-        // $doubles = double::with('credito')->get();
+    
                         //todo Ida nee Mak Rohan Husi Ida nee Mak Rohan Husi Double
-                        $app = credito::with('setoran','durasaun','arcivo')->get()->find($id);
-                        $double = double::find($id);
+                        $app = credito::with('setoran','durasaun','arcivo','double','osanfunan')->get()->find($id);
                         $osan = osanfunan::all();
                         $tempo = durasaun::orderBy('tempo', 'ASC')->get();
                         $fulan = ($app->total_credito) / ($app->durasaun->tempo) + ($app->total_credito * $app->osanfunan->osanfunan);
                         $conta = ($app->setoran->sum('update_selu')) / ($fulan * $app->durasaun->tempo);
-                        return view('layout.detail', compact('app', 'fulan', 'conta', 'tempo','osan','double'));
+                        return view('layout.detail', compact('app', 'fulan', 'conta', 'tempo','osan'));
     }
 }

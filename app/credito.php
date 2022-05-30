@@ -71,10 +71,10 @@ class credito extends Model
     }
 
 
-    // public function double()
-    // {
+    public function double()
+    {
 
-    //     return $this->hasMany(double::class);
-    // }
+        return $this->hasMany(double::class);
+    }
 
 }

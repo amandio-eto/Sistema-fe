@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\authController;
 use App\Http\Controllers\dadoscreditoController;
+use App\Http\Controllers\tbtsmController;
 use App\Http\Middleware\checkRole;
+use App\tbtsm;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -112,7 +114,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     //todo ida nee mak We Route Husi Recredito Ou Credito Double
 
     Route::resource('recredito', doubleController::class);
-
+    Route::resource('tbtsm', tbtsmController::class);
 
     //todo ida nee Mak Rohan Husi Recrito Husi Sistema Husi FE
 });

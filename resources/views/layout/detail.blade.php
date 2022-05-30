@@ -65,36 +65,119 @@
         <div class="profile-right">
 
 
-            @if( numero($conta*100) == numero(100))
-
-            <div class="alert alert-success alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <i class="fa fa-check-circle"></i> {{$app->naran }} Selu Lunas Ona
-            </div>
-            @endif
-
-
             <div class="left">
                 <!-- Button trigger modal -->
-                @if (numero($conta*100) >= 99)
-                <button type="button" class="btn btn-success m-2" data-toggle="modal" data-target="#exampleModal" style="margin:4px;">
-                    Double <i class="bi bi-plus-circle"></i>
-                </button>
-
-                <button type="button" class="btn btn-success m-2" data-toggle="modal" data-target="#exampleModal" style="margin:4px;">
-                    Aprovado Credito <i class="bi bi-plus-circle"></i>
-                </button>
+                @if(numero($conta*100) >= numero(99))
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <i class="fa fa-check-circle"></i> {{$app->naran }} Selu Lunas Ona
+                </div>
 
                 @endif
 
-                <p>Update Persentage Setoran {{$sura = numero($conta*100)  }}</p>
-<!-- Modal -->
+                {{--  <p>Update Persentage Setoran {{$sura = numero($conta*100)  }}</p>  --}}
+
+                @if(numero($conta*100) == numero(100))
+                        <div class="col" style="margin-bottom:10px;">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+                                <i class="bi bi-plus-circle"></i> Recredito
+                            </button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal2">
+                                <i class="bi bi-plus-circle"></i> Aprova Credito
+                            </button>
+                        </div>
+                @endif
+
+                {{--  ida nee Mak Modal 2  --}}
+                <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                              </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                {{--  ida nee Mak Ending Husi Modal 2  --}}
 
 
 
 
+                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ url('recredito/create') }}" method="POSTs">
 
-            </div>
+
+                                <div class="form-group">
+                                  <label for="exampleInputPassword1">Montante Imprestimo</label>
+                                  <input type="number" name="t_imprestimo" class="form-control" id="exampleInputPassword1">
+                                  <input type="hidden" name="credito_id" value="{{ $app->id }}" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Duarsaun</label>
+                                    <select class="form-control" name="durasaun_id">
+                                        <option >--Favor Hili ---</option>
+                                        @foreach($tempo as $key => $time)
+                                        <option value="{{ $time->id }}">{{ $time->tempo }}</option>
+                                        @endforeach
+
+
+
+                                    </select>
+                                </div>
+
+
+                                <div class="input-group date">
+
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="date" class="form-control" name="date">
+                                </div>
+                                <div class="form-group" style="margin-top:12px;">
+                                    <label class="fancy-checkbox">
+                                        @foreach($osan as  $juru)
+                                        <input value="{{ $juru->id }}" type="checkbox" name="osanfunan_id">
+                                        <span>{{ $juru->osanfunan }}</span>
+                                        @endforeach
+                                    </label>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="bi bi-x"></i> Calcela</button>
+                                <button type="submit" class="btn btn-success"><i class="bi bi-check"></i> Guarda</button>
+                            </div>
+                        </form>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
 
           @if (numero($conta*100) == numero(100) )
           <div class="progress">
@@ -142,6 +225,7 @@
 
 
                 </div>
+                @if (numero($conta*100) <= numero(90))
                 <div class="row">
                     <table class="table" border="1">
                         <thead>
@@ -151,9 +235,11 @@
                             <th scope="col">Osan Inan </th>
                                 <th scope="col">Durasaun</th>
                             <th scope="col">Jurus Mensal</th>
+                            <th scope="col">Osan Administrasaun</th>
+                            <th scope="col">Fee Credito</th>
                             <th scope="col">Total Deposito Mensal </th>
                             <th scope="col">Data Credito </th>
-                            <th scope="col">Status</th>
+
                           </tr>
                         </thead>
                         <tbody>
@@ -163,11 +249,30 @@
 
                               <td>{{osan(( $test = $app->total_credito)/($app->durasaun->tempo))}}</td>
                               <td>{{ osan($osan = $app->total_credito * $app->osanfunan->osanfunan )}}</td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
                               <td>{{ osan( ($app->total_credito)/($app->durasaun->tempo)+$osan)}}</td>
-                              <td> Amandio</td>
+                              <td>{{ date('d-F-Y',strtotime($app->created_at)) }}</td>
 
 
                             </tr>
+
+                            @foreach($app->double as $data)
+
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ osan($data->t_imprestimo) }}</td>
+                                <td>{{osan($osaninan=($data->t_imprestimo)/(optional($data->durasaun)->tempo ))}}</td>
+                                <td>{{ optional($data->durasaun)->tempo }}</td>
+                                <td>{{ osan($juru=($data->t_imprestimo)*optional($data->osanfunan)->osanfunan) }}</td>
+                                <td></td>
+                                <td></td>
+                                <td>{{ osan($osaninan+$juru )}}</td>
+                                <td>{{ date('d-F-Y',strtotime($data->date)) }}</td>
+
+                        </tr>
+                        @endforeach
 
 
 
@@ -189,9 +294,11 @@
                         </tbody>
                       </table>
                 </div>
+                @endif
 
-                 <div class="row">
-                        <table class="table table-bordered">
+                <div class="row">
+                    <table class="table table-bordered">
+
                             <thead class="bg-primary text-center">
 
 
@@ -249,6 +356,10 @@
 
 
                 </div>
+
+
+
+
                 <div class="text-center">
                     <a href="#" class="btn btn-success"> <i class="fa fa-download"></i>Downlaod</a>
                     <a href="{{ url('/sistema/print/'.$data->id) }}"

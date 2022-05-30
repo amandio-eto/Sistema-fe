@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-    <title>Q-Oan Timor-Leste</title>
+    <title>Porta Fundu Esperanca</title>
     <!-- Custom CSS -->
     <link href="{{ asset('auth/dist/css/style.min.css') }}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -40,7 +40,7 @@
         <!-- Login box.scss -->
         <!-- ============================================================== -->
         <div class="auth-wrapper d-flex no-block justify-content-center align-items-center bg-dark">
-            
+
             <div class="auth-box bg-dark border-top border-secondary" style="border:1px solid white;">
                 @if(session('fail'))
 
@@ -58,7 +58,7 @@
                 </div>
 
                 @endif
-                
+
                 <div id="loginform" >
                     <div class="text-center p-t-20 p-b-20">
                         {{--  <span class="db"><img src="{{ asset('auth/images/logo.png') }}" alt="logo"></span>  --}}

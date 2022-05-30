@@ -7,7 +7,9 @@
                 <li><a href="{{ url('/home') }}" class=""><i class="bi bi-house-fill"></i>
                     <span>Home</span></a></li>
                 <li><a href="{{ url('Dasboard') }}" class="active"><i class="bi bi-bank2"></i>
-                        <span>Dashboard</span></a></li>
+                        <span>Dashboard</span></a>
+                </li>
+
 
                         @endif
                         <li><a href="{{ url('/chatify') }}" class="">
