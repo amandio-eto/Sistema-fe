@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\credito;
 use Illuminate\Http\Request;
 use \App\LogActivity;
 
@@ -10,7 +11,9 @@ class homeController extends Controller
     public function home()
     {
 
-        return view('home.home');
+
+        $credito = credito::get();
+        return view('home.home',compact('credito'));
     }
 
 

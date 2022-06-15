@@ -1,8 +1,15 @@
 <!-- LEFT SIDEBAR -->
 <div id="sidebar-nav" class="sidebar">
     <div class="sidebar-scroll">
-        <nav>
+
+        {{--  ida nee Mak Modal Ba Iha Edit Husi Dados  --}}
+
+        <!-- Button trigger modal -->
+<nav>
+
+
             <ul class="nav">
+
                 @if(auth()->user()->role == 'admin');
                 <li><a href="{{ url('/home') }}" class=""><i class="bi bi-house-fill"></i>
                     <span>Home</span></a></li>
@@ -11,7 +18,7 @@
                 </li>
 
 
-                        @endif
+                 @endif
                         <li><a href="{{ url('/chatify') }}" class="">
                             <span> <i class="bi bi-chat-dots"></i> Live Chat</span></a></li>
 
@@ -25,11 +32,8 @@
                                     <span>Setting</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                                     <div id="subPages" class="collapse ">
                                     <ul class="nav">
-                                        {{--  <li><a href="/setting/logo" class="">Setting Logo</a></li>  --}}
-                                        {{--  <li><a href="/setting/saldo" class="">Setting Logo</a></li>  --}}
-                                        {{--  <li><a href="page-login.html" class="">Password</a></li>  --}}
                                         <li><a href="{{ url('/setting/osan') }}" class="">Setting Saldo</a></li>
-                                        <li><a href="{{ url('/setting/level') }}" class="">Level Credito</a></li>
+                                        <li><a href="{{ url('setting/durasaun') }}" class="">Setting Durasaun</a></li>
                                         <li><a href="{{ url('/auth/create/user') }}" class="">Cria User</a></li>
                                     </ul>
                                 </div>
@@ -60,6 +64,7 @@
                 {{--  ida nee Mak Ending Husi Dasboard  --}}
 
             </ul>
+
         </nav>
     </div>
 </div>

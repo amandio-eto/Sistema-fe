@@ -128,7 +128,8 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ url('recredito/create') }}" method="POSTs">
+                            <form action="{{ url('recredito/create') }}" method="POST">
+                                @csrf
 
 
                                 <div class="form-group">
@@ -276,27 +277,14 @@
 
 
 
-                            {{--  @foreach ($app->double as $double )
-                            <tr>
-                                <td>{{$loop->iteration}}</td>
-                                <td>{{ osan($double->t_imprestimo )}}</td>
-                                <td>{{ $app->durasaun->tempo }}</td>
-                                <td></td>
 
-                                <td>{{ $double->t_imprestimo }}</td>
-                                <td>{{ $double->t_imprestimo }}</td>
-
-
-
-                            </tr>
-                            @endforeach  --}}
 
                         </tbody>
                       </table>
                 </div>
                 @endif
 
-                <div class="row">
+          <div class="charGrafic"  >
                     <table class="table table-bordered">
 
                             <thead class="bg-primary text-center">
@@ -318,7 +306,7 @@
                             <tbody>
 
 
-                            @foreach ($app->setoran as $data)
+                             @foreach ($app->setoran as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>FE-00{{ $loop->iteration}}</td>
@@ -373,6 +361,7 @@
                 <ul class="nav" role="tablist">
                     <li class="active"><a href="#tab-bottom-left1" role="tab" data-toggle="tab">Cartaun</a></li>
                     <li><a href="#tab-bottom-left2" role="tab" data-toggle="tab">Arquivo <span class="badge">{{ $app->arcivo->count() }}</span></a></li>
+                    <li><a href="#tab-bottom-left3" role="tab" data-toggle="tab">Grafico </a></li>
                 </ul>
             </div>
             <div class="tab-content">
@@ -476,6 +465,12 @@
                         </table>
                     </div>
                 </div>
+
+                <div class="tab-pane fade" id="tab-bottom-left3">
+                    <div class="" id="chartContainer" style="height: 370px; width: 800px; margin-left:25%;">
+
+                    </div>
+                </div>
             </div>
             <!-- END TABBED CONTENT -->
         </div>
@@ -487,19 +482,41 @@
 
 @section('footer')
 
-<script src="{{ asset('jquery/jquery.js') }}"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
 <script>
-    $(document).keyup(function(){
+    window.onload = function () {
 
-        var x = Number($('#totaldividas').val());
-        var y = Number($('#montante').val());
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        title:{
+            text: "Grafico Credito"
+        },
+        {{--  axisY: {
 
-        var z = x * y;
-        $('#setoranmensal').val(z);
+        },  --}}
+        data: [{
+            type: "column",
+            showInLegend: true,
+            legendMarkerColor: "grey",
+            dataPoints: [
+                @foreach ($app->double as $data)
 
+                { y: {{$data->t_imprestimo}}, label: "{{ date('d-F-Y',strtotime($data->date)) }}" },
 
+                @endforeach
 
+            ]
+        }]
     });
-</script>
+    chart.render();
+
+    }
+    </script>
+
+
+
 
 @endsection

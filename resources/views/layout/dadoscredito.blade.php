@@ -15,6 +15,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1ffff', end
 
 color:Black;
 text-transform:uppercase;
+font-size: 12px;
 
     }
 </style>
@@ -296,7 +297,7 @@ text-transform:uppercase;
                         <th>Setoran Mensal</th>
                         <th>Total Dividas</th>
                         <th>Progresso</th>
-                        <th style="padding-left: 100px;">Actions</th>
+                        <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -307,16 +308,16 @@ text-transform:uppercase;
                         <td> <img src="{{ asset ('images/'.$data->foto) }}" width="40" height="40" > </td>
                         <td>{{ str_pad($data->clientid,3,"-") }}</td>
                         <td>{{ $data->naran }}</td>
-                        <td>{{ osan($total_credito=$data->total_credito) }}</td>
+                         <td>{{ osan($total_credito=$data->total_credito) }}</td>
                         <td>{{ osan(($progress=$data->osancredito())) }}</td>
-                        <td>{{ $tempo=$data->durasaun->tempo }}</td>
+                        <td>{{ $tempo=($data->durasaun->tempo)}}</td>
                         <td>{{osan(($osan = $data->total_credito * $data->osanfunan->osanfunan)) }}</td>
                         <td>{{ osan(($total_credito/$tempo)+$osan)  }}</td>
                         <td>{{ osan($dividas=($total_credito)+($osan*$tempo))  }}</td>
                         <td>
 
 
-                             <div class="progress">
+                               <div class="progress">
                             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:{{numero(($progress/$dividas)*100)  }}">
                                 <p>{{ numero(($progress/$dividas)*100) }}</p>
                             </div>
@@ -326,17 +327,17 @@ text-transform:uppercase;
 
                         <td>
                           <div class="d-flex align-items-center">
-                            <a type="button" href="{{ url('/Dadoscredito/edit/'.$data->id) }}" class="btn-sm btn-warning btn-sm btn-icon-text mr-3">
-                                <i class="bi bi-pen"></i>
+                            <a type="button" href="{{ url('/Dadoscredito/edit/'.$data->id) }}" class="btn-icon-text">
+                                <i class="text-warning bi bi-pen"></i>
 
                             </a>
-                            <a type="button" href="{{ url('/Dadoscredito/delete/'.$data->id) }}"  class="btn-sm  btn-danger btn-sm btn-icon-text" style="margin:0 3px;">
-                                <i class="bi bi-trash3"></i>
+                            <a type="button" href="{{ url('/Dadoscredito/delete/'.$data->id) }}"  class=" btn-icon-text" style="margin:0 3px;">
+                                <i class="text-danger bi bi-trash3"></i>
 
 
                             </a>
-                            <a type="button" href="{{ url('Detail/'.$data->id) }}" class="btn-sm btn-primary btn-sm btn-icon-text">
-                                <i class="bi bi-eye"></i>
+                            <a type="button" href="{{ url('Detail/'.$data->id) }}" class="btn-icon-text">
+                                <i class="text-primary bi bi-eye"></i>
                                 <i class="typcn typcn-delete-outline btn-icon-append"></i>
                             </a>
                         </div>

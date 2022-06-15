@@ -62,7 +62,7 @@
                 <div id="loginform" >
                     <div class="text-center p-t-20 p-b-20">
                         {{--  <span class="db"><img src="{{ asset('auth/images/logo.png') }}" alt="logo"></span>  --}}
-                        <h2 style="font-size: 30px;color:white;font-family:Arial, Helvetica, sans-serif"> Q-Oan Timor-Leste</h2>
+                        <h2 style="font-size: 30px;color:white;font-family:Arial, Helvetica, sans-serif">Porta Fundu Esperanca</h2>
                     </div>
                     <div class="center">
                         <div class="row text-center">

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class durasaun extends Model
 {
     protected $table = 'durasaun';
-    protected $fillable = ['duarsaun', 'messangen'];
+    protected $fillable = ['tempo', 'user_id'];
 
     public function credito()
     {
@@ -17,6 +17,9 @@ class durasaun extends Model
     public function double()
     {
         return $this->hasMany(double::class,'durasaun_id');
+    }
+    public function User(){
+        return $this->belongsTo(User::class);
     }
 }
 

@@ -178,6 +178,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        LaravelQRCode\Providers\QRCodeServiceProvider::class,
+
+
+
 
 
 
@@ -233,7 +237,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
-        'LogActivity' => App\Helper\LogActivity::class
+        'LogActivity' => App\Helper\LogActivity::class,
+        // 'QRCode' => LaravelQRCode\Facades\QRCode::class,
+        // 'qrcode' => SimpleSoftwareIO\QrCode\Generator::class
 
 
 

@@ -23,18 +23,18 @@ class dadoscreditoController extends Controller
     public function index(Request $request)
     {
 
-        if ($request->has('buka')) {
-            $app = credito::where('naran', 'LIKE', '%' . $request->buka . '%')
-                ->OrWhere('clientid', 'LIKE', '%' . $request->buka . '%')
-                ->get();
-        } else {
-
-            $app = credito::with('durasaun','osanfunan','setoran','osanfunan')->orderBy('id', 'ASC', 'naran', 'ASC')->get();
+        // if ($request->has('buka')) {
+        //     $app = credito::where('naran', 'LIKE', '%' . $request->buka . '%')
+        //         ->OrWhere('clientid', 'LIKE', '%' . $request->buka . '%')
+        //         ->get();
+        // } else {
 
 
 
-        }
 
+            // }
+
+            $app = credito::with('durasaun','osanfunan','setoran','osanfunan')->orderBy('clientid', 'ASC')->get();
 
 
 
@@ -228,13 +228,18 @@ class dadoscreditoController extends Controller
     public function detail($id)
     {
 
-    
+
                         //todo Ida nee Mak Rohan Husi Ida nee Mak Rohan Husi Double
                         $app = credito::with('setoran','durasaun','arcivo','double','osanfunan')->get()->find($id);
                         $osan = osanfunan::all();
                         $tempo = durasaun::orderBy('tempo', 'ASC')->get();
                         $fulan = ($app->total_credito) / ($app->durasaun->tempo) + ($app->total_credito * $app->osanfunan->osanfunan);
                         $conta = ($app->setoran->sum('update_selu')) / ($fulan * $app->durasaun->tempo);
-                        return view('layout.detail', compact('app', 'fulan', 'conta', 'tempo','osan'));
+
+                        $double = double::all();
+
+                        return view('layout.detail', compact('app', 'fulan', 'conta', 'tempo','osan','double'));
+
+
     }
 }

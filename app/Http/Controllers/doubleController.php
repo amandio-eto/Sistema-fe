@@ -36,7 +36,7 @@ class doubleController extends Controller
     {
         //todo Ida nee mak Create Double
        double::create(request()->all());
-       return back();
+       return back()->with('success','Cliente Nia Dados Credito nee Cria Ona');
 
         //todo Ida nee Mak Roha Husi Creat Double
     }
@@ -72,7 +72,7 @@ class doubleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $doubles = double::find($id);
     }
 
     /**
@@ -84,7 +84,9 @@ class doubleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $doubles = double::find($id);
+        $doubles->update($request->all());
+        return back()->with('success','Ita Boot Nia Dados Credito Update Ona');
     }
 
     /**
@@ -95,6 +97,8 @@ class doubleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $doubles = double::find($id);
+        $doubles->delete($doubles);
+        return back()->with('success','Cliente Nia Dados Hamos Ona');
     }
 }

@@ -56,4 +56,13 @@ class User extends Authenticatable
     }
 
     //! ida nee Mak Rohan Husi Contaosan no User
+
+    //todo ida nee mak relasaun Entre Durasaun Ho User
+    public function durasaun(){
+
+        return $this->hasMany(durasaun::class);
+
+    }
 }
+
+

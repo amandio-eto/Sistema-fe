@@ -5,6 +5,9 @@ use App\Http\Controllers\dadoscreditoController;
 use App\Http\Controllers\tbtsmController;
 use App\Http\Middleware\checkRole;
 use App\tbtsm;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
+Route::get('qr-code', 'qrcodeController@index');
 
 Route::get('/', function () {
     return view('auth.login');
@@ -113,10 +116,22 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
 
     //todo ida nee mak We Route Husi Recredito Ou Credito Double
 
-    Route::resource('recredito', doubleController::class);
+    Route::get('/recredito', 'doubleController@index');
+    Route::post('/recredito/create', 'doubleController@create');
+    Route::get('/recredito/edit/{id}', 'doubleController@edit');
+    Route::get('/recredito/delete/{id}', 'doubleController@destroy');
     Route::resource('tbtsm', tbtsmController::class);
-
     //todo ida nee Mak Rohan Husi Recrito Husi Sistema Husi FE
+    //? ida nee Mak Controller Husi PortailController
+    Route::get('/nav/setting/portail','portailController@index');
+    //? Ida nee Mak Rohan Husi PortailController
+    //! ida nee Mak Route controller Husi Aumenta Tempo
+    Route::get('/setting/durasaun','durasaunController@index');
+    Route::get('/setting/durasaun/edit/{id}','durasaunController@edit');
+    Route::post('/setting/durasaun/create','durasaunController@create');
+    Route::post('/setting/durasaun/update/{id}','durasaunController@update');
+    Route::get('/setting/durasaun/destory/{id}','durasaunController@destroy');
+       //! ida nee Mak Rohan Husi Route Controller Tempo
 });
 
 

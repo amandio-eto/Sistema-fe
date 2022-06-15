@@ -29,19 +29,12 @@ class AuthController extends Controller
         ]);
         if(Auth::attempt($request->only('email', 'password'))) {
 
-
-         $user =Auth::User();
+        $user =Auth::User();
         $email = $user->email;
         $name = $user->name;
         $role = $user->role;
-
-
-
-
         $dt = Carbon::now();
         $time = $dt->toDayDateTimeString();
-
-
 
         $acloging= [
 
@@ -54,7 +47,7 @@ class AuthController extends Controller
 
         ];
 
-             logs::create($acloging);
+            logs::create($acloging);
             return redirect('/home')->with('login', 'Login Sucesso');
 
         } else {
@@ -77,8 +70,6 @@ class AuthController extends Controller
         $user = Auth::User();
         Session::put('user',$user);
         $user= Session::get('user');
-
-
         $email = $user->email;
         $name = $user->name;
         $role = $user->role;
