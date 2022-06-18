@@ -33,6 +33,8 @@ class AuthController extends Controller
         $email = $user->email;
         $name = $user->name;
         $role = $user->role;
+        $role = $user->role;
+
         $dt = Carbon::now();
         $time = $dt->toDayDateTimeString();
 
@@ -119,10 +121,11 @@ class AuthController extends Controller
     public function register(Request $request)
     {
 
-        $this->validate($request, [
+       $this->validate($request, [
             'name' => 'required|string',
             'email' => 'required|string|',
             'password' => 'required|min:6|confirmed',
+            'password_confirmation' => 'required|min:6',
             'password_confirmation' => 'required|min:6',
             'role' => 'required',
             'foto' => 'required',

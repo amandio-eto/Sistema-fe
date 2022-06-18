@@ -28,6 +28,9 @@
                             <li><a href="{{ url('/setoran/show') }}" class=""><i class="bi bi-bank"></i>
                             <span>Selu Setor</span></a></li>
                             <li>
+                            <li><a href="{{ url('/setoran/show') }}" class=""><i class="bi bi-trash3-fill text-danger"></i>
+                            <span>Recyclebin</span></a></li>
+                            <li>
                                 <a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-cog"></i>
                                     <span>Setting</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                                     <div id="subPages" class="collapse ">

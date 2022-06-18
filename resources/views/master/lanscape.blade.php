@@ -52,10 +52,8 @@
                             class="img-circle" alt="Avatar" style="width: 40px;height:40px;possition:absolute;top:10px;left:10px;border: 2px solid black;"> <span>{{ auth()->user()->name }}</span> <i
                             class="icon-submenu lnr lnr-chevron-down"></i></a>
                     <ul class="dropdown-menu">
-                        {{--  <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
-                        <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
-                        <li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>  --}}
-                        <li><a href="{{ url('/auth/logout') }}"><i class="bi bi-person-circle"></i><span class="">Profile</span></a></li>
+
+                        <li><a href="{{ url('/myprofile') }}"><i class="bi bi-person-circle"></i><span class="">Profile</span></a></li>
                         <li><a href="{{ url('/auth/logout') }}"><i class="lnr lnr-exit text-danger"></i> <span class="text-danger">Logout</span></a></li>
                     </ul>
                 </li>

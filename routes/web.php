@@ -132,11 +132,31 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::post('/setting/durasaun/update/{id}','durasaunController@update');
     Route::get('/setting/durasaun/destory/{id}','durasaunController@destroy');
        //! ida nee Mak Rohan Husi Route Controller Tempo
+
+    //todo ida nee Mak Route Husi Profile
+    Route::get('/myprofile','profileController@index');
+    Route::post('/myprofile','profileController@UpdatePasssword');
+    // Route::get('/profile','profileController@index');
+
+    //todo ida nee Mak Rohan Husi Rous Profile
+
+    //? ida nee Mak soft delete Husi Sistema fe
+    Route::get('/delete/file','softdeleController@index');
+    //? ida nee Mak Rohan Husi Softdelete
 });
+
+//!<---------------------------------------------------------------------------------->
 
 
 //todo ida nee Mak Middleware Ba Iha User Sira nebe Acesso ba IHa Sistema Fundu Esperanca
 Route::group(['middleware' => ['auth', 'checkRole:admin,user']], function () {
+
+      Route::get('/myprofile','profileController@index');
+      Route::post('/myprofile','profileController@UpdatePasssword');
+      Route::post('/myprofile/foto','profileController@EditFoto');
+      // Route::get('/profile','profileController@index');
+
+      //todo ida nee Mak Rohan Husi Rous Profile
     Route::get('/home', 'homeController@home');
     Route::post('/setting/osan/create', 'saldoController@create');
     Route::get('/setting/osan', 'saldoController@index');
