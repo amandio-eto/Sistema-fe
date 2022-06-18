@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class credito extends Model
 {
-    use SoftDeletes;
+
     public $table = "credito";
     protected $fillable = ['durasaun_id', 'osanfunan_id', 'naran',  'data_moris', 'hela_fatin', 'suco', 'padministrativo', 'municipio', 'salario', 'total_credito', 'phone', 'foto', 'clientid'];
 
