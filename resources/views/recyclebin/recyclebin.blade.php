@@ -44,7 +44,7 @@
                 </div>
                 <div class="panel-footer">
                     <div class="row">
-                        <div class="col-md-6"><span class="panel-note"><i class="fa fa-clock-o"></i> Last 24 hours</span></div>
+                       {{ $delete->links() }}
 
                     </div>
                 </div>

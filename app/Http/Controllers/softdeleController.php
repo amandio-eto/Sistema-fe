@@ -10,7 +10,7 @@ class softdeleController extends Controller
 {
     public function index(){
 
-        $delete = credito::OrderBy('id','DESC')->onlyTrashed()->get();
+        $delete = credito::OrderBy('id','DESC')->onlyTrashed()->paginate(5);
         return view('recyclebin.recyclebin',compact('delete'));
         return $delete;
 
