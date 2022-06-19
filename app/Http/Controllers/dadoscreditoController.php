@@ -34,13 +34,13 @@ class dadoscreditoController extends Controller
 
             // }
 
-            $app = credito::with('durasaun','osanfunan','setoran','osanfunan')->orderBy('clientid', 'ASC')->get();
+            $app = credito::with('durasaun','osanfunan','setoran','osanfunan')->orderBy('clientid','ASC')->get();
 
 
 
         $saldo = saldo();
         $id = idcredito::all();
-        $durasaun = durasaun::all();
+        $durasaun = durasaun::Orderby('tempo','ASC')->get();
         $osan = osanfunan::all();
 
         return view('layout.dadoscredito', compact('saldo', 'durasaun', 'id', 'app', 'osan'));

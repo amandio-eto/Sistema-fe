@@ -18,23 +18,26 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Naran</th>
-                                <th>Total Credito</th>
-                                <th>Date &amp; Time</th>
+                                <th>Credito Id</th>
+                                <th>Data Moris Cliente</th>
+                                <th>Data Delete</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
-
+                            @foreach ($delete as $del)
                             <tr>
-                                <td><a href="#">763650</a></td>
-                                <td>Michael</td>
-                                <td>$34</td>
-                                <td>Oct 18, 2016</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td><a href="#">{{ $del->naran }}</a></td>
+                                <td>{{ $del->clientid }}</td>
+                                <td>{{date('d-F-Y',strtotime($del->data_moris ))}}</td>
+                                <td>{{ date('d-F-Y',strtotime($del->deleted_at)) }}</td>
                                 <td>
-                                    <a href=""><i class="bi bi-bootstrap-reboot text-primary"></i></a> |
-                                    <a  href=""><i class="bi bi-x-octagon-fill text-danger"></i></a>
+                                    <a href="{{ url('/delete/restore/'.$del->id) }}" class="btn-xs btn-primary">Restore</a> |
+                                    <a  class="btn-xs btn-danger" href="{{ url('/delete/forcedelete/'.$del->id) }}">Delete Permanete</a>
                                 </td>
                             </tr>
+                            @endforeach
 
                         </tbody>
                     </table>
@@ -42,7 +45,7 @@
                 <div class="panel-footer">
                     <div class="row">
                         <div class="col-md-6"><span class="panel-note"><i class="fa fa-clock-o"></i> Last 24 hours</span></div>
-                     
+
                     </div>
                 </div>
             </div>

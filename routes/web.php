@@ -142,6 +142,8 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
 
     //? ida nee Mak soft delete Husi Sistema fe
     Route::get('/delete/file','softdeleController@index');
+    Route::get('/delete/forcedelete/{id}','softdeleController@forcedelete');
+    Route::get('/delete/restore/{id}','softdeleController@restore');
     //? ida nee Mak Rohan Husi Softdelete
 });
 

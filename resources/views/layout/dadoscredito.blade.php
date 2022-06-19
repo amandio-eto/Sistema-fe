@@ -276,7 +276,7 @@ font-size: 12px;
 
               <div class="card">
                 <div class="table-responsive pt-3">
-                  <table class="table table-striped project-orders-table" id="datatable" >
+                  <table class="table table-striped project-orders-table hover"  id="datatable" >
                     <thead class="thead">
                       <tr>
                         <th class="ml-5">Nu</th>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\credito;
 use App\portail;
 use Illuminate\Http\Request;
 
@@ -16,8 +17,9 @@ class portailController extends Controller
     public function data()
     {
 
-        $por = portail::all();
-        return view('master.portail',compact('por'));
+
+        return view('master.portail');
+
     }
 
 }
