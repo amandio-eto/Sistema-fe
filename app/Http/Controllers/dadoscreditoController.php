@@ -127,7 +127,7 @@ class dadoscreditoController extends Controller
     {
 
         $data = credito::find($id);
-        $durasaun = durasaun::all();
+        $durasaun = durasaun::Orderby('tempo','ASC');
         $osan = osanfunan::all();
 
         return view('layout.dadoscredito_edit', compact('data', 'durasaun', 'osan'));

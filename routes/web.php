@@ -21,7 +21,7 @@ Route::post('/auth/post', 'AuthController@postlogin');
 Route::get('/auth/logout', 'AuthController@logout');
 
 Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
-
+	
     //?ida ne Mak Route Husi Log
     Route::get('add-to-log', 'HomeController@myTestAddToLog');
     Route::get('logActivity', 'HomeController@logActivity');
@@ -150,7 +150,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
 //!<---------------------------------------------------------------------------------->
 
 
-//todo ida nee Mak Middleware Ba Iha User Sira nebe Acesso ba IHa Sistema Fundu Esperanca
+//todo ida nee Mak Middleware Ba Iha User Sira nebe Acesso ba IHa Sisema Fundu Esperanca
 Route::group(['middleware' => ['auth', 'checkRole:admin,user']], function () {
 
       Route::get('/myprofile','profileController@index');

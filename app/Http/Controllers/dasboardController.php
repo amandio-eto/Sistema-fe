@@ -25,4 +25,6 @@ class dasboardController extends Controller
 
         return view('layout.dasboard', compact('saldo', 'credito', 'update_selu', 'cash', 'saldototal', 'saldo_actual', 'osanactual', 'creditoosan'));
     }
+
+    
 }
